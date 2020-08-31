@@ -20,12 +20,14 @@ After completing this lab, you'll be able to:
 - Deploy and configure a highly available file server on the failover cluster.
 - Validate the deployment of the highly available file server.
 
+## Estimated time: **60 minutes**
+
 ## Lab setup
 
-Estimated time: **60 minutes**
-
 Virtual machines: **SEA-DC1**, **SEA-ADM1**, **SEA-SVR2**, and **SEA-SVR3**
+
 User name: **Contoso\Administrator**
+
 Password: **Pa55w.rd**
 
 Sign in only to **SEA-ADM1**. Sign in to other virtual machines only when instructed in lab steps.

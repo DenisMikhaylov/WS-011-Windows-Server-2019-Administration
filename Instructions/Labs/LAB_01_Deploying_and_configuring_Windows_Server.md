@@ -21,7 +21,7 @@ Contoso, Ltd. wants to implement several new servers in their environment, and t
 
 VMs: **WS-011T00A-SEA-DC1-B**, **WS-011T00A-SEA-ADM1-B**, **WS-011T00A-SEA-SVR4**
 
-User name: **Contoso\Administrator**
+Username: **Contoso\Administrator**
 
 Password: **Pa55w.rd**
 
@@ -63,16 +63,17 @@ The main tasks for this exercise are as follows:
 1. Set the DNS server to be **172.16.10.10**. Leave the alternate DNS server blank.
 1. Return to the main menu.
 1. Open PowerShell.
-1. Run the **Rename-Computer -NewName SEA-SVR4** cmdlet.
-1. Run the **Add-Computer -DomainName Contoso.com -Credential Contoso\Administrator -restart -force** cmdlet. Enter **Pa55w.rd** when prompted for credentials.
+1. Run the ```Rename-Computer -NewName SEA-SVR4 -restart -force``` cmdlet.
+1. Sign in and open PowerShell
+1. Run the ```Add-Computer -DomainName Contoso.com -Credential Contoso\Administrator -restart -force``` cmdlet. Enter **Pa55w.rd** when prompted for credentials.
 
 ### Task 3: Install Features on Demand on Server Core
 
 1. Mount the **Win2019_FOD.iso** image file to **drive D** of **SEA-SVR4**.
 1. Sign in as **Contoso\Administrator**.
-1. At the command prompt, run **Explorer.exe**. Note that command fails to run and returns an error.
+1. At the command prompt, run **Explorer.exe**. Note that command fails and returns an error.
 1. Open PowerShell.
-1. At the PowerShell prompt, run **Add-Windowscapability -Online -Name Servercore.Appcompatibility~~~~0.0.1.0 -Source D:\**.
+1. At the PowerShell prompt, run ```Add-Windowscapability -Online -Name Servercore.Appcompatibility~~~~0.0.1.0 -Source D:```.
 1. Run **Restart-computer**, and then sign in as **Administrator**.
 1. Run **Explorer.exe**. Note that File Explorer now opens successfully.
 
@@ -104,7 +105,7 @@ The main tasks for this exercise are as follows:
 
 ### Task 2: Add servers for remote administration
 
-1. Open Microsoft Edge and go to **Https://Sea-Adm1**.
+1. Open Microsoft Edge and go to ```Https://Sea-Adm1```.
 1. In Windows Admin Center, add **SEA-DC1** and **SEA-SVR4**.
 
 ### Task 3: Configure Windows Admin Center extensions
@@ -116,7 +117,7 @@ The main tasks for this exercise are as follows:
 1. Install the **DNS (Preview)** extension.
 1. Switch to the Server Manager module.
 1. Select **DNS** and install the DNS PowerShell tools. The tools will take a few moments to install.
-1. Open the **Contoso.com** zone and observe the console.
+1. Open the ```Contoso.com``` zone and observe the console.
 
 ### Task 4: Verify remote administration
 
@@ -129,10 +130,10 @@ The main tasks for this exercise are as follows:
 ### Task 5: Administer servers with Remote PowerShell
 
 1. Open PowerShell.
-1. Run the **Enter-PSSession -ComputerName SEA-DC1** cmdlet.
-1. Run the **Get-Service -Name AppIDSvc** cmdlet. Note that the service is currently stopped.
-1. Run the **Start-Service -Name AppIDSvc** cmdlet.
-1. Run the **Get-Service -Name AppIDSvc** cmdlet. The service is running now.
+1. Run the ```Enter-PSSession -ComputerName SEA-DC1``` cmdlet.
+1. Run the ```Get-Service -Name AppIDSvc``` cmdlet. Note that the service is currently stopped.
+1. Run the ```Start-Service -Name AppIDSvc``` cmdlet.
+1. Run the ```Get-Service -Name AppIDSvc``` cmdlet. The service is running now.
 
 ### Results
 

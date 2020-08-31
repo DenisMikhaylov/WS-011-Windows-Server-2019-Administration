@@ -33,7 +33,7 @@ lab:
    Enter-PSSession $sess
    ```
   
-   You should get a [sea-svr1.contoso.com] title in your command prompt. From this point, all the commands that you enter run on **SEA-SVR1**.
+   You should get a [`sea-svr1.contoso.com`] title in your command prompt. From this point, all the commands that you enter run on **SEA-SVR1**.
 1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
 
    ```powershell
@@ -101,14 +101,14 @@ lab:
     Enter-PSSession $sess1
     ```
 
-    You should get a [sea-svr2.contoso.com] title in your command prompt. From this point, all commands that you enter run on **SEA-SVR2**.
+    You should get a [`sea-svr2.contoso.com`] title in your command prompt. From this point, all commands that you enter run on **SEA-SVR2**.
 
-1. Repeat steps 5 through 10 in the PowerShell window where you have a session opened on **sea-svr2.contoso.com**. This will configure **SEA-SRV2** for **Hyper-V Replica**. In step 10, you should get no result when running the **Get-VM** command because no VMs are configured on **SEA-SVR2**.
+1. Repeat steps 5 through 10 in the PowerShell window where you have a session opened on **`sea-svr2.contoso.com`**. This will configure **SEA-SRV2** for **Hyper-V Replica**. In step 10, you should get no result when running the **Get-VM** command because no VMs are configured on **SEA-SVR2**.
 1. Leave both PowerShell sessions open for the next task.
 
 ### Task 2: Configure replication
 
-1. Switch to the PowerShell window where you have a remote PowerShell session opened for **sea-svr1.contoso.com**, enter the following command, and then select Enter:
+1. Switch to the PowerShell window where you have a remote PowerShell session opened for **`sea-svr1.contoso.com`**, enter the following command, and then select Enter:
 
    ```powershell
    Enable-VMReplication SEA-CORE1 -ReplicaServerName SEA-SVR2.contoso.com -ReplicaServerPort 80 -AuthenticationType Kerberos -computername SEA-SVR1.contoso.com
@@ -132,7 +132,7 @@ lab:
 
    In the result table, search for the value in the **State** column. It should be **InitialReplicationInProgress**. Wait for 4&ndash;5 minutes, and then repeat this command. Verify that the value in the **State** column is **Replicating**. Don't proceed to the next steps until you get this value. Additionally, ensure that **Primary server** is set to **SEA-SVR1** and **ReplicaServer** is set to **SEA-SVR2**.
 
-1. Switch to the PowerShell window where you have a remote PowerShell session opened for **sea-svr2.contoso.com**, enter the following command, and then select Enter:
+1. Switch to the PowerShell window where you have a remote PowerShell session opened for **`sea-svr2.contoso.com`**, enter the following command, and then select Enter:
 
    ```powershell
    get-vm
@@ -144,62 +144,62 @@ lab:
 
 ### Task 3: Validate failover
 
-1. Switch to the PowerShell window where you have a remote PowerShell session opened for **sea-svr1.contoso.com**, enter the following command, and then select Enter:
+1. Switch to the PowerShell window where you have a remote PowerShell session opened for **`sea-svr1.contoso.com`**, enter the following command, and then select Enter:
 
    ```powershell
    Start-VMFailover -Prepare -VMName SEA-CORE1 -computername SEA-SVR1.contoso.com
    ```
 
    When prompted, enter **Y**, and then select Enter. This command prepares for the planned failover of **SEA-CORE1** by replicating any pending changes.
-1. Switch to the PowerShell window where you have a remote PowerShell session opened for **sea-svr2.contoso.com**, enter the following command, and then select Enter:
+1. Switch to the PowerShell window where you have a remote PowerShell session opened for **`sea-svr2.contoso.com`**, enter the following command, and then select Enter:
 
    ```powershell
    Start-VMFailover -VMName SEA-CORE1 -computername SEA-SVR2.contoso.com
    ```
 
    When prompted, enter **Y**, and then select Enter. This command fails over the replica VM.
-1. In the PowerShell window where you have a remote PowerShell session opened for **sea-svr2.contoso.com**, enter the following command, and then select Enter:
+1. In the PowerShell window where you have a remote PowerShell session opened for **`sea-svr2.contoso.com`**, enter the following command, and then select Enter:
 
    ```powershell
    Set-VMReplication -Reverse -VMName SEA-CORE1 -computername SEA-SVR2.contoso.com
    ```
 
    This command switches the replica VM to a primary VM.
-1. In the PowerShell window where you have the remote PowerShell session opened for **sea-svr2.contoso.com**, enter the following command, and then select Enter:
+1. In the PowerShell window where you have the remote PowerShell session opened for **`sea-svr2.contoso.com`**, enter the following command, and then select Enter:
 
    ```powershell
    Start-VM -VMName SEA-CORE1 -computername SEA-SVR2.contoso.com
    ```
 
    This command starts the VM that has been switched from a replica VM to a primary VM.
-1. In the PowerShell window where you have a remote PowerShell session opened for **sea-svr2.contoso.com**, enter the following command, and then select Enter:
+1. In the PowerShell window where you have a remote PowerShell session opened for **`sea-svr2.contoso.com`**, enter the following command, and then select Enter:
 
    ```powershell
    Get-VM
    ```
 
    In the result table, search for the value in the **State** column. It should be **Running**.
-1. In the PowerShell window where you have a remote PowerShell session opened for **sea-svr2.contoso.com**, enter the following command, and then select Enter:
+1. In the PowerShell window where you have a remote PowerShell session opened for **`sea-svr2.contoso.com`**, enter the following command, and then select Enter:
 
    ```powershell
    Get-VMReplication
    ```
 
    In the result table, search for the value in the **State** column. It should be **Replicating**. Additionally, ensure that the **Primary server** is now set to **SEA-SVR2** and that **ReplicaServer** is set to **SEA-SVR1**.
-1. In the PowerShell window where you have a remote PowerShell session opened for **sea-svr2.contoso.com**, enter the following command, and then select Enter:
+1. In the PowerShell window where you have a remote PowerShell session opened for **`sea-svr2.contoso.com`**, enter the following command, and then select Enter:
 
    ```powershell
    Stop-VM SEA-CORE1
    ```
 
-1. In the PowerShell window where you have a remote PowerShell session opened for **sea-svr1.contoso.com**, enter the following commands, and then select Enter:
+1. In the PowerShell window where you have a remote PowerShell session opened for **`sea-svr1.contoso.com`**, enter the following commands, and then select Enter:
 
    ```powershell
    Exit-PSSession
    Remove-PSSession $sess
    ```
 
-1. In the PowerShell window where you have a remote PowerShell session opened for **sea-svr2.contoso.com**, enter the following commands, and then select Enter:
+1. In the PowerShell window where you have a remote PowerShell session opened for **`sea-svr2.contoso.com`**, enter the following commands, and then select Enter:
 
    ```powershell
    Exit-PSSession
@@ -250,7 +250,7 @@ lab:
    Enter-PSSession $sess
    ```
 
-   You should get a [sea-svr1.contoso.com] title in your command prompt. From this point, all commands that you enter run on **SEA-SVR1**.
+   You should get a [`sea-svr1.contoso.com`] title in your command prompt. From this point, all commands that you enter run on **SEA-SVR1**.
 
 1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
 
@@ -300,7 +300,7 @@ lab:
 
 ### Task 2: Perform a backup
 
-1. In the PowerShell window where you have a remote PowerShell session opened for **sea-svr1.contoso.com**, enter the following commands, and then select Enter:
+1. In the PowerShell window where you have a remote PowerShell session opened for **`sea-svr1.contoso.com`**, enter the following commands, and then select Enter:
 
    ```powershell
    $Policy = New-WBPolicy
@@ -322,7 +322,7 @@ lab:
 
    >**Note**: When prompted, sign in as **Contoso\\Administrator** with password **Pa55w.rd**.
 
-1. Now you must add this backup location to the backup policy by entering the following command, and then selecting Enter:
+1. Now you must add this backup location to the backup policy by entering the following command, and then selecting Enter (if prompted, enter Y, and then select Enter):
 
    ```powershell
    Add-WBBackupTarget -Policy $Policy -Target $NetworkBackupLocation

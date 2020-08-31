@@ -2,7 +2,7 @@
 lab:
     title: 'Lab: Configuring security in Windows Server'
     type: 'Answer Key'
-    module: 'Module 8: Security in Windows Server'
+    module: 'Module 8: Windows Server security'
 ---
 
 # Lab answer key: Configuring security in Windows Server
@@ -16,7 +16,7 @@ lab:
 1. Sign-in to **SEA-ADM1** as **Contoso\\Administrator** with the password **Pa55w.rd**.
 2. Select **Start**, and then enter **Group Policy Management**.
 3. Select **Group Policy Management**.
-4. In the Group Policy Management Console, expand **Forest: Contoso.com**, expand **Domains**, expand **Contoso.com**, right-click or access the context menu for the **IT** OU (Organizational Unit), and then select **Create a GPO in this domain, and Link it here**.
+4. In the Group Policy Management Console, expand **Forest: ```Contoso.com```**, expand **Domains**, expand **```Contoso.com```**, right-click or access the context menu for the **IT** OU (Organizational Unit), and then select **Create a GPO in this domain, and Link it here**.
 5. In the **New GPO** dialog box, in the **Name** text box, enter **CredentialGuard_GPO**, and then select **OK**.
 6. In the **Group Policy Management** window, under **IT**, right-click or access the context menu for **CredentialGuard_GPO**, and then select **Edit**.
 7. In the Group Policy Management Editor, navigate to **Computer Configuration\\Policies\\Administrative Templates\\System\\Device Guard**.
@@ -117,7 +117,7 @@ lab:
 
 2. Select **Start**, and then enter **Group Policy**.
 3. Select **Group Policy Management**.
-4. In the Group Policy Management Console, expand **Forest: Contoso.com**, expand **Domains**, expand **Contoso.com**, right-click or access the context menu for the **Seattle_Servers** OU, and then select **Create a GPO in this domain, and Link it here**.
+4. In the Group Policy Management Console, expand **Forest: ```Contoso.com```**, expand **Domains**, expand **```Contoso.com```**, right-click or access the context menu for the **Seattle_Servers** OU, and then select **Create a GPO in this domain, and Link it here**.
 5. In the **New GPO** dialog box, in the **Name** text box, enter **LAPS_GPO**, and then select **OK**.
 6. In the **Group Policy Management** window, under **Seattle_Servers**, right-click or access the context menu for **LAPS_GPO**, and then select **Edit**.
 7. In the **Group Policy Management Editor** window, under **Computer Configuration**, expand the **Policies** node, expand the **Administrative Templates** node, and then select **LAPS**.
@@ -131,6 +131,9 @@ lab:
 ### Task 3: Deploy LAPS client-side extension
 
 1. Switch to **SEA-SVR1**, using **Contoso\\Administrator** with the password **Pa55w.rd**.
+
+> **Note:** You will be prompted to change your password, due to the previous exercise. Use the new password in place of the documented password throughout the remainder of the lab.
+
 2. Enter the following command:
 
     ```cmd
@@ -156,7 +159,7 @@ lab:
 5. In the Windows PowerShell window, enter the following command:
 
     ```powershell
-    Get-AdmPwdPassword SEA-SVR1 | Out-Gridview
+    Get-ADComputer SEA-SVR1 -Properties ms-Mcs-AdmPwd
     ```
 
 6. Review the password assigned to SEA-SVR1.

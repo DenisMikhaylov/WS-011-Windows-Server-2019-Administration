@@ -8,7 +8,7 @@ lab:
 
 ## Scenario
 
-You are working as an administrator at Contoso Ltd. The company is expanding its business with several new locations. The Active Directory Domain Services (AD DS) Administration team is currently evaluating methods available in Windows Server for rapid and remote domain controller deployment. The team is also looking for a way to automate certain AD DS administrative tasks. Additionally, the team wants to establish configuration management based on Group Policy Objects (GPO) and enterprise certification authority (CA) hierarchy.
+You are working as an administrator at Contoso Ltd. The company is expanding its business with several new locations. The Active Directory Domain Services (AD DS) Administration team is currently evaluating methods available in Windows Server for rapid and remote domain controller deployment. The team is also searching for a way to automate certain AD DS administrative tasks. Additionally, the team wants to establish configuration management based on Group Policy Objects (GPO) and enterprise certification authority (CA) hierarchy.
 
 ## Objectives
 
@@ -20,13 +20,13 @@ After completing this lab, you’ll be able to:
 
 - Deploy, manage, and use digital certificates.
 
+## Estimated time: 60 minutes
+
 ## Lab setup
 
-Estimated Time: 60 minutes
+Virtual machines: **WS-011T00A-SEA-DC1**, **WS-011T00A-SEA-SVR1**, **WS-011T00A-SEA-ADM1**, and **WS-011T00A-SEA-CL1**
 
-Virtual Machines: **WS-011T00A-SEA-DC1**, **WS-011T00A-SEA-SVR1**, **WS-011T00A-SEA-ADM1**, and **WS-011T00A-SEA-CL1**
-
-User Name: **Contoso\Administrator**
+User Name: **Contoso\\Administrator**
 
 Password: **Pa55w.rd**
 
@@ -54,7 +54,7 @@ The main tasks for this exercise are as follows:
 
 ### Task 1: Deploy AD DS on a new Windows Server Core server
 
-1. Switch to **SEA-ADM1** and from Server manager, open **Windows PowerShell**.
+1. Switch to **SEA-ADM1** and from **Server Manager**, open **Windows PowerShell**.
 1. Use the **Install-WindowsFeature** cmdlet in Windows PowerShell to install the AD DS role on **SEA-SVR1**.
 1. Use the **Get-WindowsFeature** cmdlet to verify the installation.
 1. Ensure that you select the check boxes for **Active Directory Domain Services**, **Remote Server Administration Tools**, and **Role Administration Tools**. For the **AD DS** and **AD LDS Tools** nodes, only the **Active Directory module for Windows PowerShell** should be installed, and not the graphical tools, such as the Active Directory Administrative Center.
@@ -69,9 +69,9 @@ The main tasks for this exercise are as follows:
 1. On **SEA-ADM1**, from **Server Manager**, configure **SEA-SVR1** as an AD DS domain controller by using the following settings:
 
     - Type: Additional domain controller for existing domain
-    - Domain: **Contoso.com**
+    - Domain: ```Contoso.com```
     - Credentials: **Contoso\Administrator** with the password **Pa55w.rd**
-    - Directory Services Restore Mode (DSRM) Password: **Pa55w.rd**
+    - Directory Services Restore Mode (DSRM) password: **Pa55w.rd**
     - Do not remove the selections for DNS and the global catalog
 
 1. On the **Review Options** page, select **View Script**.
@@ -89,7 +89,12 @@ The main tasks for this exercise are as follows:
     ```powershell
     Invoke-Command –ComputerName SEA-SVR1 { }
     ```
-1. Paste the copied command between the braces ({ }), and then select Enter to start the installation.
+1. Paste the copied command between the braces ({ }), and then select Enter to start the installation. The complete command should be as follows:
+
+   ```PowerShell
+   Invoke-Command –ComputerName SEA-SVR1 {Install-ADDSDomainController -NoGlobalCatalog:\$false -CreateDnsDelegation:\$false -Credential (Get-Credential) -CriticalReplicationOnly:\$false -DatabasePath "C:\Windows\NTDS" -DomainName "Contoso.com" -InstallDns:\$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:\$false -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:\$true}
+   ```
+
 1. Provide the following credentials:
 
     - User name: **Contoso\Administrator**
@@ -165,7 +170,7 @@ The main tasks for this exercise are as follows:
 
 #### Task 2: Link the GPO
 
-  - Link the **Contoso Standards** GPO to the **Contoso.com** domain.
+  - Link the **Contoso Standards** GPO to the ```Contoso.com``` domain.
 
 #### Task 3: Review the effects of the GPO’s settings
 
@@ -242,13 +247,13 @@ Install-WindowsFeature Web-Server -IncludeManagementTools
 1. Open **Server Manager**, and then open **Internet Information Services (IIS) Manager**.
 1. Enroll for a domain certificate by using the following settings:
 
-    - Common name: **sea-adm1.contoso.com**
+    - Common name: ```sea-adm1.contoso.com```
     - Organization: **Contoso**
     - Organizational unit: **IT**
     - City/locality: **Seattle**
     - State/province: **WA**
     - Country/region: **US**
-    - Friendly name: sea-adm1
+    - Friendly name: **sea-adm1**
 
 1. Create an HTTPS binding for the default website, and then associate it with the sea-adm1 certificate.
 

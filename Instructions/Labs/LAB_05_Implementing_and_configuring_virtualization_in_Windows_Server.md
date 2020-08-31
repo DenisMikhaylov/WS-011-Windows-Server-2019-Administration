@@ -10,11 +10,11 @@ lab:
 
 Contoso is a global engineering and manufacturing company with its head office in Seattle, USA. An IT office and data center are in Seattle to support the Seattle location and other locations. Contoso recently deployed a Windows Server 2019 server and client infrastructure.
 
-Due to many physical servers being currently underutilized, the company plans to expand virtualization to optimize the environment. Because of this, you decide to perform a proof of concept to validate how Hyper-V can be used to manage a virtual machine environment. Also, the Contoso DevOps team wants to explore container technology to determine whether they can help reduce deployment times for new applications and to simplify moving applications to the cloud. You plan to work with the team to evaluate Windows Server containers and to consider providing Internet Information Services (Web services) in a container.
+Because of many physical servers being currently underutilized, the company plans to expand virtualization to optimize the environment. Because of this, you decide to perform a proof of concept to validate how Hyper-V can be used to manage a virtual machine environment. Also, the Contoso DevOps team wants to explore container technology to determine whether they can help reduce deployment times for new applications and to simplify moving applications to the cloud. You plan to work with the team to evaluate Windows Server containers and to consider providing Internet Information Services (Web services) in a container.
 
 ## Objectives
 
-After completing this lab, you’ll be able to:
+After completing this lab, you'll be able to:
 
 - Create and configure VMs.
 - Install and configure containers.
@@ -40,7 +40,7 @@ Note that Internet access is required to successfully complete the second exerci
 
 1. Repeat these steps for **SEA-ADM1** and **SEA-SVR1**.
 
-## Exercise 1: Create and configure VMs
+## Exercise 1: Creating and configuring VMs
 
 ### Exercise scenario
 
@@ -57,7 +57,7 @@ The main tasks for this exercise are:
 
 1. On SEA-ADM1, open **Server Manager**.
 1. In Server Manager, select **All Servers**.
-1. In the Servers list, Right-click or access the context menu **SEA-SVR1** and then select **Hyper-V Manager**.
+1. In the Servers list, select and hold (or right-click) or access the context menu **SEA-SVR1** and then select **Hyper-V Manager**.
 1. Use the **Virtual Switch Manager** to create the following switch:
    - Name: **Contoso Private Switch**
    - Connection type: **Private network**
@@ -86,14 +86,14 @@ The main tasks for this exercise are:
 
 ### Task 4: Manage Virtual Machines using Windows Admin Center
 
-1. On SEA-ADM1, on the Task Bar, select **Microsoft Edge**.
+1. On SEA-ADM1, on the taskbar, select **Microsoft Edge**.
 1. In Microsoft Edge, on the Favorites Bar, select **Windows Admin Center**.
 1. In the Windows Security box, enter **Contoso\Administrator** with the password of **Pa55w.rd** and then select **OK**.
 1. In the **All connections** list, select **SEA-SVR1**.
 1. In the **Specify your credentials** page, select **Use another account for this connection**, and then enter **Contoso\Administrator** with the password of **Pa55w.rd**.
 1. In the **Tools** list, select **Virtual Machines**. Review the Summary pane.
 1. On SEA-VM1, create a new disk, 5 GB in size.
-1. Start **SEA-VM1** and then view the statistics for the running VM.
+1. Start **SEA-VM1** and then display the statistics for the running VM.
 1. Refresh the page and then shut down the VM.
 1. In the **Tools** list, select **Virtual switches** and identify the existing switches.
 1. Close all open windows on SEA-ADM1.
@@ -102,7 +102,7 @@ The main tasks for this exercise are:
 
 After this exercise, you should have used Hyper-V Manager and Windows Admin Center to create a virtual switch, create a virtual hard disk, and then create and manage a virtual machine.
 
-## Exercise 2: Install and configure containers
+## Exercise 2: Installing and configuring containers
 
 ### Exercise Scenario
 
@@ -118,11 +118,11 @@ The main tasks for this exercise are:
 
 1. On SEA-ADM1, open **Windows Admin Center** using the Contoso\Administrator credentials.
 1. Connect to **SEA-SVR1** using the Contoso\Administrator credentials and then connect to the server using PowerShell.
-1. At the PowerShell command prompt enter the following command and then press Enter:
+1. At the PowerShell command prompt enter the following command and then select Enter:
 
    `Install-Module -Name DockerMsftProvider -Repository PSGallery -Force`
 
-1. At the PowerShell command prompt enter the following command and then press Enter:
+1. At the PowerShell command prompt enter the following command and then select Enter:
 
    `Install-Package -Name docker -ProviderName DockerMsftProvider`
 
@@ -165,7 +165,7 @@ The main tasks for this exercise are:
 
    Note the IPv4 address of the Ethernet adapter named vEthernet (nat). This is the address of the new container. Make a note of the IPv4 address of the Ethernet adapter named **Ethernet**. This is the IP address of the Host (SEA-SVR1).
 
-1. In Microsoft Edge, open another tab and then enter **<http://172.16.10.12>**. Observe the default IIS page.
+1. In Microsoft Edge, open another tab and then enter **```<http://172.16.10.12>```**. Observe the default IIS page.
 
 1. In the remote PowerShell session, enter the following command:
 

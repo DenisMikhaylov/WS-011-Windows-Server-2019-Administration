@@ -8,16 +8,16 @@ lab:
 
 ## Scenario
 
-Contoso Ltd. is an engineering, manufacturing, and distribution company. The organization is based in London, England and has major offices in Toronto, Canada and Sydney, Australia.
+Contoso, Ltd. is an engineering, manufacturing, and distribution company. The organization is based in London, England, and it has major offices in Toronto, Canada, and Sydney, Australia.
 
-Since Contoso has been in business for many years, the existing servers include many versions of Windows Server. you're planning to migrate those services to servers running Windows Server 2019.
+Because Contoso has been in business for many years, the existing servers include many versions of Windows Server. You're planning to migrate those services to servers running Windows Server 2019.
 
 ## Objectives
 
 After completing this lab, you'll be able to:
 
 - Select a process to migrate server workloads.
-- Plan how to migrate files with Storage Migration Services.
+- Plan how to migrate files with Storage Migration Service.
 
 ## Estimated time: 20 minutes
 
@@ -29,22 +29,22 @@ This lab doesn't require virtual machines (VMs).
 
 ### Scenario
 
-Contoso Ltd. has an Active Directory Domain Services (AD DS) forest with a single Active Directory domain named contoso.com. The domain controllers for the domain are running a mix of Windows Server 2012 R2 and Windows Server 2016. Many applications are installed in the domain; standardizing on using Windows Server 2019 for all domain controllers is the best option for you.
+Contoso has an Active Directory Domain Services (AD DS) forest with a single Active Directory domain named `contoso.com`. The domain controllers for the domain are running a mix of Windows Server 2012 R2 and Windows Server 2016. Many applications are installed in the domain; standardizing on using Windows Server 2019 for all domain controllers is the best option for you.
 
-Trey Research, a specialist engineering company, has been purchased by Contoso Ltd. Trey Research has its own AD DS forest connected by a forest trust. Much of the Trey Research infrastructure is old, so you need to standardize tools and management systems across the two companies.
+Trey Research, a specialist engineering company, has been purchased by Contoso. Trey has its own AD DS forest connected by a forest trust. Much of the Trey infrastructure is old, so you need to standardize tools and management systems across the two companies.
 
 There are other server workloads on servers running earlier versions of Windows Server. For example, the Toronto location has Dynamic Host Configuration Protocol (DHCP) on a server running Windows Server 2012 R2. You want to migrate as many of these server workloads as possible to Windows Server 2019.
 
-The main tasks for this exercise are as follows:
+The main tasks for this exercise are to:
 
-1. Study the scenario
-1. Plan how to update domains controllers to Windows Server 2019
-1. Plan how to migrate other server workloads
+1. Study the scenario.
+1. Plan how to update domains controllers to Windows Server 2019.
+1. Plan how to migrate other server workloads.
 
 ### Task 1: Study the scenario
 
-1. Study the lab scenario
-1. Study the exercise scenario
+1. Study the lab scenario.
+1. Study the exercise scenario.
 
 ### Task 2: Plan how to update domain controllers to Windows Server 2019
 
@@ -61,7 +61,7 @@ Answer the following questions based on the scenario:
 Answer the following questions based on the scenario:
 
 1. What steps do you need to perform before running the Windows PowerShell cmdlets in the Windows Server Migration Tools on Windows Server 2019?
-1. What steps do you need to perform on a source server running Windows Server 2012 R2 before you can use the the Windows PowerShell cmdlets in the Windows Server Migration Tools?
+1. What steps do you need to perform on a source server running Windows Server 2012 R2 before you can use the Windows PowerShell cmdlets in the Windows Server Migration Tools?
 1. Which cmdlet can you use to verify which features can be migrated from a source server?
 1. List the high-level steps for using the Windows Server Migration Tools to migrate settings from a source server to a destination server.
 
@@ -71,16 +71,16 @@ Answer the following questions based on the scenario:
 
 Contoso has file servers running multiple versions of Windows Server. The oldest file server is running Windows Server 2003. There are also a few Linux servers being used for file storage by developers. Some of the Linux servers are using Samba, but others are using Network File System (NFS). A new policy is being implemented that requires all file servers to be migrated to Windows Server 2019.
 
-The main tasks for this exercise are as follows:
+The main tasks for this exercise are to:
 
-1. Study the scenario
-1. Plan the migration of file servers
-1. Plan how to use Storage Migration Service
+1. Study the scenario.
+1. Plan the migration of file servers.
+1. Plan how to use Storage Migration Service.
 
 ### Task 1: Study the scenario
 
-1. Study the lab scenario
-1. Study the exercise scenario
+1. Study the lab scenario.
+1. Study the exercise scenario.
 
 ### Task 2: Plan the migration of file servers
 
@@ -88,7 +88,7 @@ Answer the following questions based on the scenario:
 
 1. Can you use Storage Migration Service to migrate file shares from Windows Server 2003 to Windows Server 2019?
 1. Can you use Storage Migration Service to migrate files on Linux servers?
-1. Can you use Storage Migration Service to consolidate multiple file servers to a single new server?
+1. Can you use Storage Migration Service to combine multiple file servers to a single new server?
 1. Can you use Storage Migration Service to migrate file shares to a VM in Azure?
 
 ### Task 3: Plan how to use Storage Migration Service

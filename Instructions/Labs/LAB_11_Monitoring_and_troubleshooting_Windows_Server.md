@@ -22,7 +22,7 @@ After completing this lab, you'll be able to:
 
 ## Lab setup
 
-Estimated time: **60 minutes**
+Estimated time: **40 minutes**
 
 Virtual machines: **WS-011T00A-SEA-DC1**, **WS-011T00A-SEA-ADM1**, and **WS-011T00A-SEA-CL1**
 
@@ -50,6 +50,8 @@ The main tasks for this exercise are:
 1. Create and start a data collector set
 2. Create a typical workload on the server
 3. Analyze the collected data
+
+> **Note**: After starting the Data Collector Set, there might be a delay of 10 minutes for the results to appear.
 
 ### Task 1: Create and start a data collector set
 
@@ -80,8 +82,8 @@ The main tasks for this exercise are:
     Fsutil file createnew bigfile 104857600
     Copy bigfile \\SEA-dc1\c$
     Copy \\SEA-dc1\c$\bigfile bigfile2
-    Del bigfile *.*
-    Del \\SEA-dc1\c$\bigfile *.*
+    Del bigfile*.*
+    Del \\SEA-dc1\c$\bigfile*.*
     ```
 
 2. Don't close the **Command Prompt** window.

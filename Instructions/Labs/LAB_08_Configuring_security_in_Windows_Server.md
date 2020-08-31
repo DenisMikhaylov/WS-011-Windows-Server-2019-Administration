@@ -1,14 +1,14 @@
 ---
 lab:
     title: 'Lab: Configuring security in Windows Server'
-    module: 'Module 8: Security in Windows Server'
+    module: 'Module 8: Windows Server security'
 ---
 
 # Lab: Configuring security in Windows Server
 
 ## Scenario
 
-Contoso Corporation is a medical research company with about 5,000 employees worldwide. They have specific needs for ensuring that medical records and data remain private. The company has a headquarters location and multiple worldwide sites. Contoso has recently deployed a Windows Server and Windows client infrastructure. You have been asked to implement improvements in the server security configuration.
+Contoso Pharmaceuticals is a medical research company with about 5,000 employees worldwide. They have specific needs for ensuring that medical records and data remain private. The company has a headquarters location and multiple worldwide sites. Contoso has recently deployed a Windows Server and Windows client infrastructure. You have been asked to implement improvements in the server security configuration.
 
 ## Objectives
 
@@ -46,7 +46,7 @@ The main tasks for this exercise are to:
 1. Sign-in to **SEA-ADM1** as **Contoso\\Administrator** with the password **Pa55w.rd**.
 2. Select **Start**, and then enter **Group Policy Management**.
 3. Select **Group Policy Management**.
-4. In the Group Policy Management Console, expand **Forest: Contoso.com**, expand **Domains**, expand **Contoso.com**, right-click or access the context menu for the **IT** OU (Organizational Unit), and then select **Create a GPO in this domain, and Link it here**.
+4. In the Group Policy Management Console, expand **Forest: ```Contoso.com```**, expand **Domains**, expand **```Contoso.com```**, right-click or access the context menu for the **IT** OU (Organizational Unit), and then select **Create a GPO in this domain, and Link it here**.
 5. In the **New GPO** dialog box, in the **Name** text box, enter **CredentialGuard_GPO**, and then select **OK**.
 6. In the **Group Policy Management** window, under **IT**, right-click or access the context menu for **CredentialGuard_GPO**, and then select **Edit**.
 7. In the Group Policy Management Editor, navigate to **Computer Configuration\\Policies\\Administrative Templates\\System\\Device Guard**.
@@ -174,7 +174,7 @@ The main tasks for this exercise are:
 
 2. Select **Start**, and then enter **Group Policy**.
 3. Select **Group Policy Management**.
-4. In the Group Policy Management Console, expand **Forest: Contoso.com**, expand **Domains**, expand **Contoso.com**, right-click or access the context menu for the **Seattle_Servers** OU, and then select **Create a GPO in this domain, and Link it here**.
+4. In the Group Policy Management Console, expand **Forest: ```Contoso.com```**, expand **Domains**, expand **```Contoso.com```**, right-click or access the context menu for the **Seattle_Servers** OU, and then select **Create a GPO in this domain, and Link it here**.
 5. In the **New GPO** dialog box, in the **Name** text box, enter **LAPS_GPO**, and then select **OK**.
 6. In the **Group Policy Management** window, under **Seattle_Servers**, right-click or access the context menu for **LAPS_GPO**, and then select **Edit**.
 7. In the **Group Policy Management Editor** window, under **Computer Configuration**, expand the **Policies** node, expand the **Administrative Templates** node, and then select **LAPS**.
@@ -188,6 +188,9 @@ The main tasks for this exercise are:
 ### Task 3: Deploy LAPS client-side extension
 
 1. Switch to **SEA-SVR1**, using **Contoso\\Administrator** with the password **Pa55w.rd**.
+
+ > **Note**: You will be prompted to change your password, due to the previous exercise. Use the new password in place of the documented password throughout the remainder of the lab.
+
 2. Enter the following command:
 
     ```cmd
@@ -213,22 +216,11 @@ The main tasks for this exercise are:
 5. In the Windows PowerShell window, enter the following command:
 
     ```powershell
-    Get-AdmPwdPassword SEA-SVR1 | Out-Gridview
+    Get-ADComputer SEA-SVR1 -Properties ms-Mcs-AdmPwd
     ```
 
 6. Review the password assigned to SEA-SVR1.
 7. Close the gridview window.
-
-### Questions
-
-- How do you manage local administrator account passwords in your organization?
-- Answers will vary. Some students will indicate that their organizations have no technology in place. Other students will have a solution, including some who use LAPS.
-
-- What is the name of the tool that you can use to enable Credential Guard?
-- The tool that you can use to enable Credential Guard is called the **Hypervisor-Protected Code Integrity and Windows Defender Credential Guard hardware readiness tool**.
-
-- Which Windows PowerShell cmdlet do you use to retrieve the local Administrator password from AD DS when a computer is configured to use LAPS?
-- You use the **Get-AdmPwdPassword** cmdlet to retrieve the local Administrator password from AD DS when a computer is configured to use LAPS.
 
 ### Results
 

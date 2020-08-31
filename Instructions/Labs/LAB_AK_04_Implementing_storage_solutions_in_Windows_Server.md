@@ -5,29 +5,30 @@ lab:
     module: 'Module 4: File servers and storage management in Windows Server'
 ---
 
-# Lab answer key : Implementing storage solutions in Windows Server
+# Lab answer key: Implementing storage solutions in Windows Server
 
->**Note**: Be sure to revert the virtual machines (VMs) between each exercise. Due to most of the VMs being Windows Server 2019 Server Core, the time it takes to revert and restart is faster than attempting to undo changes made to the storage environment in the exercises.
+> **Note**: Be sure to revert the virtual machines (VMs) between each exercise. Due to most of the VMs being Windows Server 2019 Server Core, the time it takes to revert and restart is faster than attempting to undo changes made to the storage environment in the exercises.
 
 ## Exercise 1: Implementing Data Deduplication
 
-### Task 1: Install the Data Deduplication role service**
+### Task 1: Install the Data Deduplication role service
 
 1. On **SEA-ADM1**, select **Start**, and then select **Server Manager**.
 2. In Server Manager, select **Manage**, and then select **Add Roles and Features**.
 3. In the **Add Roles and Features Wizard**, select **Next** twice.
-4. On the **Select destination server** page , in the **Server Pool** pane, select **SEA-SVR3.Contoso.com**, and then select **Next**.
-5. On the **Select server roles** page, in the **Roles** pane, expand the **File and Storage Services** item, and then expand the **File and iSCSI Services** item, and then select the **the Data Deduplication** item.
-6. In the **Add features that are required for Data Deduplication** window, select **Add Features** , and then select **Next**.
+4. On the **Select destination server** page , in the **Server Pool** pane, select **```SEA-SVR3.Contoso.com```**, and then select **Next**.
+5. On the **Select server roles** page, in the **Roles** pane, expand the **File and Storage Services** item, and then expand the **File and iSCSI Services** item, select the **Data Deduplication** item, and then select **Next**.
 6. On the **Select features** page, select **Next**, and then in the **Confirm installation selections** page, select **Install**.
 7. While the role service is installing, on the taskbar, select the **File Explorer** icon.
 8. In **File Explorer**, expand drive **C**.
 8. Right-click or access the context menu for the **Labfiles** directory, and then select **Give access to**. In the next context menu, select **Specific people…**.
-9. In the **Network access** window, select **Share**, and when the **Your folder is shared** section opens, select **Done**.
-10. Switch to **SEA-SVR3**.
-11. In the **Command Prompt** window, enter **PowerShell**.
-11. Note that the prompt changes with the **PS** cursor to let you know you are now in Windows PowerShell.
-12. In the **Administrator: Windows PowerShell** window, enter the following commands, selecting Enter after each line.
+1. In the **Type a name and then Click Add, or click the arrow to find someone** text box, type **Users** and click **Add**.
+1. In the **Network access** window, select **Share**, and when the **Your folder is shared** section opens, select **Done**.
+1. 2. In Server Manager, on the **Add Roles and Features Wizard installation succeeded** page, select **Close**.
+1. Switch to **SEA-SVR3**.
+1. In the **Command Prompt** window, enter **PowerShell**.
+1. Note that the prompt changes with the **PS** cursor to let you know you are now in Windows PowerShell.
+1. In the **Administrator: Windows PowerShell** window, enter the following commands, selecting Enter after each line.
 
      ```
      Get-Disk
@@ -38,7 +39,7 @@ lab:
      ```
 
      ```
-     New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter
+     New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter M
      ```
 
      ```
@@ -84,12 +85,11 @@ lab:
 ### Task 2: Enable and configure Data Deduplication
 
 1. Return to **SEA-ADM1**
-2. In Server Manager, on the **Add Roles and Features Wizard installation succeeded** page, select **Close**.
 2. In the Server Manager console tree, right-click or access the context menu for **File and Storage Services**, and then from the context menu select **Disks**
 3. In the **Disks** pane, select **SEA-SVR3**, **Number** column **1**.
 3. In the **Volumes** pane, right-click or access the context menu for the **M** volume, and then from the context menu, select **Configure Data Deduplication**.
 4. In the **Volume (M:\) Deduplication Settings** wizard, select the Data Deduplication drop-down menu and change the selection to the **General purpose file server** setting.
-5. Set **Deduplicate files older than (in days):** to **1**.
+5. Set **Deduplicate files older than (in days):** to **0**.
 6. Select the **Set Deduplication Schedule** button.
 7. In the **SEA-SVR3 Deduplication Schedule** window, select **Enable throughput optimization**, and then select **OK**.
 8. In the **Volume (M:\) Deduplication Settings Wizard**, select **OK**.
@@ -111,11 +111,12 @@ lab:
      ```
 
 8. Switch to **SEA-SVR3**.
-8. In the **Command Prompt** window, enter **Dir song1.mp3**.
-9. Observe the **Size** and **Size on disk** property values for the **song1.mp3** file.
+8. In the **Command Prompt** window, enter **Dir**.
+9. Observe the **Bytes free** size on property values for the **Data** Directory.
 10. Wait for five to ten minutes to allow the deduplication job to run.
-11. Switch back to **SEA-ADM1**, and to the **WAC SEA-SVR3 PowerShell** pane.
-12. To verify the Data Deduplication status, run the following commands, pressing Enter at the end of each line:
+1. Repeat step 12.
+1. Switch back to **SEA-ADM1**, and to the **WAC SEA-SVR3 PowerShell** pane.
+1. To verify the Data Deduplication status, run the following commands, pressing Enter at the end of each line:
 
      ```
      Get-DedupStatus –Volume M: | fl
@@ -132,7 +133,7 @@ lab:
 13. In **Server Manager**, select **File and Storage Services**, select disk **1**, and then select Volume **M**.
 14. Observe the values for **Deduplication Rate** and **Deduplication Savings**.
 
-> When you have finished the exercise, revert the VMs to their initial state.
+> **Note:** When you have finished the exercise, revert the VMs to their initial state.
 
 ## Exercise 2: Configuring iSCSI storage
 
@@ -148,13 +149,13 @@ lab:
 3. Enter the following command, and then select Enter:
 
      ```
-     Enter-PSSEssion -ComputerName SEA-SVR3 -Credential "Contoso\Administrator"
+     Enter-PSSession -ComputerName SEA-SVR3 -Credential "Contoso\Administrator"
      ```
 
 4. In the **Windows PowerShell credential request** pop-up window, in the **Password** text box, enter **Pa55w.rd**, and then select **OK**.
 5. In the **Administrator: Windows PowerShell** window, enter the following commands, pressing Enter at the end of each line:
 
-   >**Note**: In the following command, drive Y is placeholder text only. The drive letter to use will be returned to you in the results of the second command.
+   > **Note**: In the following command, drive Y is placeholder text only. The drive letter to use will be returned to you in the results of the second command.
 
    ```
    Initialize-Disk -Number 2
@@ -218,7 +219,7 @@ lab:
      iscsicpl
      ```
 
-    >**Note**: The **iscsicpl** command will open an **iSCSI Initiator Properties** dialog box.
+    > **Note**: The **iscsicpl** command will open an **iSCSI Initiator Properties** dialog box.
 
 21. In the **iSCSI Initiator Properties** dialog box, on the **Targets** tab, in the **Target** text box, enter **SEA-SVR3**, and then select **Quick Connect**.
 22. In the **Quick Connect** dialog box, note that the **Discovered target name** is **iqn.1991-05.com.microsoft:sea-svr3-iscscifarm-target**, and then select **Done**.
@@ -237,7 +238,7 @@ lab:
      Get-Disk
      ```
 
-   >**Note**: Both disks are present and healthy, but offline. To use them, you need to initialize and format them on **SEA-DC1**.
+   > **Note**: Both disks are present and healthy, but offline. To use them, you need to initialize and format them on **SEA-DC1**.
 
 4. In the **Windows PowerShell** window, enter the following commands, selecting Enter after each command:
 
@@ -257,7 +258,7 @@ lab:
 6. Return to **SEA-ADM1**.
 1. In **server Manager**, refresh the page in the **Tasks** drop-down, and note that both the drives are now **Online**.
 
-> When you have finished the exercise, revert the VMs to their initial state.
+> **Note:** When you have finished the exercise, revert the VMs to their initial state.
 
 ## Exercise 3: Configuring redundant Storage Spaces
 
@@ -310,7 +311,7 @@ lab:
 
 2. Return to **SEA-ADM1**.
 1. In the taskbar, select the **File Explorer** icon.
-3. In the **File Explorer** window, in the **Address bar**, enter **\\sea-svr3\t$**.
+3. In the **File Explorer** window, in the **Address bar**, enter **\\\\sea-svr3\t$**.
 4. Right-click or access the context menu in the empty details pane, and then select **New Folder**. Name the folder **Test data**, and then select **Enter**.
 5. Double-click **Test data**, or activate its context menu and select **Open**.
 1. Right-click or access the context menu for the empty details pane, select **New**, and then **Text Document**. Name the new document **document1**, and then select **Enter**.
@@ -320,7 +321,7 @@ lab:
 1. On **SEA-ADM1**, in Server Manager, in **File and Storage Services**, select **Storage Pools**, and then select **SP1**.
 1. In the **Physical Disks** pane, select the **TASKS** drop-down list, and then select **Add Physical Disk**.
 3. In the **Add Physical Disk** dialog box, in the **Allocation** drop-down list, ensure **Automatic** is selected, select the check box corresponding to the disk, and then select **OK**.
-4. Right-click or access the context menu for the top disk in the list, and then select **Remove disk**.
+4. In the **PHYSICAL DISKS** pane, right-click the top disk in the list, and then select **Remove disk**.
 5. In the **Remove Physical Disk** window, select **Yes**.
 6. Review the statement in the **Remove Physical Disk** window, and then select **OK**.
 7. Return to **File Explorer**.
@@ -329,7 +330,7 @@ lab:
 ### Task 5: Add a new disk to storage pool
 
 1. In Server Manager, on **SEA-ADM1**, in **File and Storage Services**, select **Storage Pools**.
-1. In **Storage Pools**, in the **TASKS** drop-down list, select the **Rescan Pool** item.
+1. In **Storage Pools**, in the **TASKS** drop-down list, select the **Rescan Storage** item.
 2. In the **Rescan Storage** window, select **Yes**.
 3. In the **Physical Disks** pane, select the **TASKS** drop-down list, and then select **Add Physical Disk**.
 4. In the **Add Physical Disk** window, in the **Allocation** drop-down list, ensure **Automatic** is selected. Select the check box, and then select **OK**.
@@ -356,7 +357,7 @@ lab:
 
 11. When the document opens in **Notepad**, verify that all the text additions you made earlier are present, and then close **Notepad**.
 
-> When you have finished the exercise, revert the VMs to their initial state.
+> **Note:** When you have finished the exercise, revert the VMs to their initial state.
 
 ## Exercise 4: Implementing Storage Spaces Direct
 
@@ -379,13 +380,13 @@ For Exercise 4, you will need to start the following VMs using the username **Co
 6. When **Windows PowerShell ISE** completes loading, select **File**, select **Open**, and then navigate to **C:\Labfiles\Mod04**.
 1. Select **Implement-StorageSpacesDirect.ps1**, and then select **Open**.
 
-    >**Note**: The script is divided into numbered steps. There are eight steps, and each step has a number of commands. Run the commands by highlighting each command and pressing **F8**, one after the other in accordance with the following instructions.Ensure each step finishes, that is, goes from Stop operation (a red square) to a Run selection (green arrow) in the menu bar, before starting the next.
+    > **Note**: The script is divided into numbered steps. There are eight steps, and each step has a number of commands. Run the commands by highlighting each command and pressing **F8**, one after the other in accordance with the following instructions.Ensure each step finishes, that is, goes from Stop operation (a red square) to a Run selection (green arrow) in the menu bar, before starting the next.
 
 7. Select the line in step 1, that is, highlight the entire line, starting with the first **Invoke-Command**, and then select **F8**.
 8. Wait until the installation finishes, and then verify that the output of the command includes four lines (one for each server) with **Success** as **True**.
 9. Select the second line in step 1, starting with _second_ **Invoke-Command**, and then select **F8**.
 
-      >**Note**: When you start the second command to restart the servers, you can run the third command to install the console without waiting for the second command's restarts to finish.
+      > **Note**: When you start the second command to restart the servers, you can run the third command to install the console without waiting for the second command's restarts to finish.
 
 10. Select the third line in step 1, starting with **Install**, and then select **F8**.
 1. Wait a few minutes while the servers restart and the **Failover Cluster Manager** tool is added to **SEA-ADM1**.  
@@ -396,12 +397,12 @@ For Exercise 4, you will need to start the following VMs using the username **Co
 1. On **SEA-ADM1**, select the **Windows** key, and in the **Start** menu, select **Server Manager**.
 2. In Server Manager, select **Tools**, and then select **Failover Cluster Manager**. (This is to confirm it is installed.) Leave the Server Manager console open.
 3. In the **Administrator: Windows PowerShell ISE** window, select the line in step 2 starting with **Test-Cluster**, and then select **F8**.
-1. Wait until the installation finishes, which takes about 5 minutes.
+1. Wait until the test finishes, which takes about 5 minutes.
 4. Verify that the output of the command only includes warnings and that the last line is a validation report in HTML format.
 5. In the **Administrator: Windows PowerShell ISE** window, select the line in step 3 starting with **New-Cluster**, and then select **F8**.
 1. Wait until the installation finishes.
 6. Verify that the output of the command only includes warnings, and that the last line has a **Name** column with the value **S2DCluster**.
-7. Switch to the **Failover Cluster Manager** window, select **Connect to Cluster**, enter **S2DCluster.Contoso.com**, and then select **OK**.
+7. Switch to the **Failover Cluster Manager** window, and in the **Management** pane, select **Connect to Cluster**, enter **```S2DCluster.Contoso.com```**, and then select **OK**.
 
 ### Task 3: Enable Storage Spaces Direct
 
@@ -412,7 +413,7 @@ For Exercise 4, you will need to start the following VMs using the username **Co
 4. In the **Administrator: Windows PowerShell ISE** window, select the line in step 5 starting with **Invoke-Command**, and then select **F8**.
 1. Wait until the installation finishes.
 5. In the output of the command, verify that the **FriendlyName** attribute has a value of **S2DStoragePool**.
-6. In the **Failover Cluster Manager** window, expand **S2DCluster.Contoso.com**, expand **Storage**, and then select **Pools**.
+6. In the **Failover Cluster Manager** window, expand **```S2DCluster.Contoso.com```**, expand **Storage**, and then select **Pools**.
 7. Verify the existence of **Cluster Pool 1**.
 8. In the **Administrator: Windows PowerShell ISE** window, select the line in step 6 starting with **Invoke-Command**, and then select **F8**.
 1. Wait until the installation finishes.
@@ -448,22 +449,23 @@ For Exercise 4, you will need to start the following VMs using the username **Co
 5. Switch to the **Server Manager** window, and then select **All Servers**.
 6. In the **Servers** list, select **SEA-SVR3**.
 7. Verify that **Manageability** changes to **Target computer not accessible**.
-8. Switch back to the **File Explorer** window.
-9. Create a new text document in the **VMFolder**.
-10. In **Failover Cluster Manager**, select **Disks**, and then select **Cluster Virtual Disk (CSV)**.
-11. Verify that for the **Cluster Virtual Disk (CSV)**, the **Health Status** is **Warning**, and **Operational Status** is **Degraded**. (**Operational Status** might also display as **Incomplete**.)
-12. On the taskbar, select the **Microsoft Edge** icon.
-13. In Microsoft Edge, in the Favorites menu, select the **Windows Admin Center (WAC)** tab.
-14. In the **Windows security** window, in the **Username** text box, enter **Contoso\Administrator**, in the **Password** text box, enter **Pa55w.rd**, and then select **OK**.
-15. In the **All connections** page, select **+ Add**.
-16. In the **Add resources** blade, scroll to the **Windows Server cluster** pane, and in the pane, select **Add**.
-17. In the **Add cluster** blade **Cluster name** text box, enter **S2DCluster.Contoso.com**, and then select **Add**.
+**Note**: You may have to refresh the Server Manager view.
+1. Switch back to the **File Explorer** window.
+1. Create a new text document in the **VMFolder**.
+1. In **Failover Cluster Manager**, select **Disks**, and then select **Cluster Virtual Disk (CSV)**.
+1. Verify that for the **Cluster Virtual Disk (CSV)**, the **Health Status** is **Warning**, and **Operational Status** is **Degraded**. (**Operational Status** might also display as **Incomplete**.)
+1. On the taskbar, select the **Microsoft Edge** icon.
+1. In Microsoft Edge, in the Favorites menu, select the **Windows Admin Center (WAC)** tab.
+1. In the **Windows security** window, in the **Username** text box, enter **Contoso\Administrator**, in the **Password** text box, enter **Pa55w.rd**, and then select **OK**.
+1. In the **All connections** page, select **+ Add**.
+1. In the **Add resources** blade, scroll to the **Windows Server cluster** pane, and in the pane, select **Add**.
+1. In the **Add cluster** blade **Cluster name** text box, enter **```S2DCluster.Contoso.com```**, and then select **Add**.
 
      > **Note**: Initially, the connection under the current user will be denied.
 
 18. In the **Specify your credentials** window, select the **Use another account for this connection** radio button. In the **Username** text box, enter **Contoso\Administrator**, in the **Password** text box, enter **Pa55w.rd**, and then select Enter.
 19. Clear the check box for **Also add servers in the cluster** (they are already included), and then select **Add**.
-20. After the cluster is added to the **All connections** page, select **S2DCluster.Contoso.com.**
+20. After the cluster is added to the **All connections** page, select **```S2DCluster.Contoso.com```**.
 21. Verify that when the page loads, the **Dashboard** appears has an alert for **SEA-SVR3** being offline.
 22. Start **WS-011T00A-SEA-SVR3**. (While **SEA-SVR3** should start quickly, it may take a few minutes for the alert to be removed.)
 

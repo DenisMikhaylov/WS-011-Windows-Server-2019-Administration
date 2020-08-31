@@ -7,14 +7,14 @@ lab:
 
 # Lab answer key: Implementing and configuring virtualization in Windows Server
 
-### Exercise 1: Create and configure VMs
+### Exercise 1: Creating and configuring VMs
 
 #### Task 1: Create a Hyper-V virtual switch
 
 1. On SEA-ADM1, select **Start** and then select **Server Manager**.
 1. In Server Manager, select **All Servers**.
-1. In the Servers list, Right-click or access the context menu **SEA-SVR1** and then select **Hyper-V Manager**.
-1. In Hyper-V Manager, ensure that **SEA-SVR1.Contoso.com** is selected.
+1. In the Servers list, select and hold (or right-click) or access the context menu **SEA-SVR1** and then select **Hyper-V Manager**.
+1. In Hyper-V Manager, ensure that **```SEA-SVR1.Contoso.com```** is selected.
 1. In the Actions pane, select **Virtual Switch Manager**.
 1. In the **Virtual Switch Manager**, in the **Create virtual switch** pane, select **Private** and then select **Create Virtual Switch**.
 1. In the **Virtual Switch Properties** box, enter the following details and then select **OK**:
@@ -53,7 +53,7 @@ lab:
 
 ### Task 4: Manage Virtual Machines using Windows Admin Center
 
-1. On SEA-ADM1, on the Task Bar, select **Microsoft Edge**.
+1. On SEA-ADM1, on the taskbar, select **Microsoft Edge**.
 1. In Microsoft Edge, on the Favorites Bar, select **Windows Admin Center**.
 1. In the Windows Security box, enter **Contoso\Administrator** with the password of **Pa55w.rd** and then select **OK**.
 1. In the **All connections** list, select **SEA-SVR1**.
@@ -66,7 +66,7 @@ lab:
 1. Select **Create an empty virtual hard disk** and then in the Size box enter **5** GB.
 1. Select **Save disks settings** and then select **Close**.
 1. On the **Properties** page, select **Start** to start **SEA-VM1**.
-1. Scroll down and view the statistics for the running VM.
+1. Scroll down and display the statistics for the running VM.
 1. Refresh the page and then select **Shut down**. Select **Yes** to confirm.
 1. In the **Tools** list, select **Virtual switches**. Notice the two switches that have been configured.
 1. Close all open windows on SEA-ADM1.
@@ -75,11 +75,11 @@ lab:
 
 After this exercise, you should have used Hyper-V Manager and Windows Admin Center to create a virtual switch, create a virtual hard disk, and then create and manage a virtual machine.
 
-### Exercise 2: Install and configure containers
+### Exercise 2: Installing and configuring containers
 
 #### Task 1: Install Docker on Windows Server
 
-1. On SEA-ADM1, from the task bar, open **Microsoft Edge**.
+1. On SEA-ADM1, from the taskbar, open **Microsoft Edge**.
 1. On the Favorites bar, select **Windows Admin Center**.
 1. In the Windows Security box, enter the following credentials:
 
@@ -87,17 +87,17 @@ After this exercise, you should have used Hyper-V Manager and Windows Admin Cent
    - Password: **Pa55w.rd**
 1. On the **All connections** page, select **SEA-SVR1**.
 1. On the **Specify your credentials** page, select **Use another account for this connection**. Provide the **Contoso\Administrator** credentials, and then select **Continue**.
-1. In the **Tools** list, select **PowerShell**. Provide the **Contoso\Administrator** credentials, and then press **Enter**. You are now connected to SEA-SVR1 using a Remote PowerShell connection.
-1. At the PowerShell command prompt enter the following command and then press Enter:
+1. In the **Tools** list, select **PowerShell**. Provide the **Contoso\Administrator** credentials, and then select **Enter**. You are now connected to SEA-SVR1 using a Remote PowerShell connection.
+1. At the PowerShell command prompt enter the following command and then select Enter:
 
    `Install-Module -Name DockerMsftProvider -Repository PSGallery -Force`
 
-1. At the NuGet Provider prompt, enter **Y** for yes and then press Enter.
-1. At the PowerShell command prompt enter the following command and then press Enter:
+1. At the NuGet Provider prompt, enter **Y** for yes and then select Enter.
+1. At the PowerShell command prompt enter the following command and then select Enter:
 
    `Install-Package -Name docker -ProviderName DockerMsftProvider`
 
-1. At the confirmation prompt, enter **A** for Yes to All and then press Enter.
+1. At the confirmation prompt, enter **A** for Yes to All and then select Enter.
 1. After the installation is complete, restart the computer by using the following command:
 
    `Restart-Computer -Force`
@@ -124,7 +124,7 @@ After this exercise, you should have used Hyper-V Manager and Windows Admin Cent
 
    `docker pull mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2019`
 
-   It may take several minutes for the server core image to finish downloading.
+   It might take several minutes for the server core image to finish downloading.
 
 1. To confirm the Docker image that is currently pulled, use the following command:
 
@@ -144,7 +144,7 @@ After this exercise, you should have used Hyper-V Manager and Windows Admin Cent
 
    Note the IPv4 address of the Ethernet adapter named vEthernet (nat). This is the address of the new container. Make a note of the IPv4 address of the Ethernet adapter named **Ethernet**. This is the IP address of the Host (SEA-SVR1).
 
-1. In Microsoft Edge, open another tab and then enter **<http://172.16.10.12>**. Observe the default IIS page.
+1. In Microsoft Edge, open another tab and then enter **```<http://172.16.10.12>```**. Observe the default IIS page.
 
 1. In the remote PowerShell session, enter the following command:
 

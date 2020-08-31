@@ -1,7 +1,7 @@
 ---
 lab:
     title: 'Lab: Implementing RDS in Windows Server'
-    module: 'Module 9: Remote Desktop services in Windows Server'
+    module: 'Module 9: RDS in Windows Server'
 ---
 
 # Lab: Implementing RDS in Windows Server
@@ -18,7 +18,7 @@ You been tasked with creating a proof of concept (POC) for a virtual machine (VM
 
 ## Objectives
 
-After completing this lab, you’ll be able to<!-- Shouldn't this be "After completing this lab, you will have:"? -->:
+After completing this lab, you’ll be able to:
 
 - Implement RDS
 - Configure session collection settings and use RDS
@@ -54,14 +54,14 @@ Sign in to **WS-011T00A-SEA-CL1** by using the following credentials:
 
 ### Scenario<!-- A scenario tells a story to give context to the assignments. The following pgph is not a scenario. Can we rewrite this so it is a scenario? -->
 
-In this exercise, you will learn<!-- Hopefully they've already learned how. In this lab, they will be *doing*, right? --> how to install RDS using Windows PowerShell and Server Manager. You will create a session collection using Windows PowerShell, and then change various collection settings. You will configure User Profile Disk using both Windows PowerShell and graphical user interfaces (GUIs)<!-- Instead of saying GUIs, can we say what the program is? Is it Server Manager? -->, and connect to a Remote Desktop Session Host (RD Session Host) using the Remote Desktop Web (RD Web) portal<!-- I think this is supposed to be the "RD Web Access" portal. If you agree, please s/r.-->. You will conclude the exercise by verify that a User Profile Disk has been created for a user.
+In this exercise, you will learn how to install RDS using Windows PowerShell and Server Manager. You will create a session collection using Windows PowerShell, and then change various collection settings. You will configure User Profile Disk using both Windows PowerShell and graphical user interfaces (GUIs)<!-- Instead of saying GUIs, can we say what the program is? Is it Server Manager? -->, and connect to a Remote Desktop Session Host (RD Session Host) using the Remote Desktop Web (RD Web) portal<!-- I think this is supposed to be the "RD Web Access" portal. If you agree, please s/r.-->. You will conclude the exercise by verify that a User Profile Disk has been created for a user.
 
 The main tasks for this exercise are as follows:
 
 1. Install RDS.
 2. Create a session collection.
 3. Configure the session collection properties.
-4. Connect to the session collection from the RD Web portal<!-- I think these should be "RD Web Access portal." If you agree, please s/r. -->
+4. Connect to the session collection from the RD Web portal
 
 #### Task 1: Install RDS<!-- There should always be at least one sentence between headings. Please add one here. Even something like, "You will install RDS using Server Manager, and then by using Windows PowerShell." -->
 
@@ -76,14 +76,14 @@ The main tasks for this exercise are as follows:
 
 4. On the **Select deployment scenario** page, select **Session-based desktop deployment**, and then select **Next**.
 5. On the **Review role services** page, select **Next**.
-6. On the **Specify RD Connection Broker server** page, in the **Server Pool** section, select **SEA-RDS1.Contoso.com**<!-- We have live hyperlinks here and in the next two steps, which we'll need to remove. -->, and then select **Next**.
-7. On the **Specify RD Web Access server** page, in the **Server Pool** section, select **SEA-RDS1.Contoso.com** and then select **Next**.
-8. On the **Specify RD Session Host servers** page, in the **Server Pool** section, select **SEA-RDS1.Contoso.com**, and then select **Next**.
+6. On the **Specify RD Connection Broker server** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**, and then select **Next**.
+7. On the **Specify RD Web Access server** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```** and then select **Next**.
+8. On the **Specify RD Session Host servers** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**, and then select **Next**.
 9. On the **Confirm selections** page, select **Cancel**.
 
 ##### Install RDS using Windows PowerShell
 
-> **NOTE**: We will now do the actual installation of RDS using Windows PowerShell. The previous steps were included to demonstrate how to install RDS using Server Manager.<!-- I would delete this last sentence. I would also have this be normal text, and not a note.-->
+> **NOTE**: We will now do the actual installation of RDS using Windows PowerShell. The previous steps were included to demonstrate how to install RDS using Server Manager.
 
 1. Switch to **SEA-DC1**.
 1. In the **Administrator: C:\Windows\system32\cmd.exe** command prompt window, enter the following command, and then select Enter:<br>
@@ -97,18 +97,18 @@ The main tasks for this exercise are as follows:
 1. Open **Server Manager**, and wait for it to refresh.
 1. In **Server Manager**, select **Remote Desktop Services**.
 
-#### Task 2: Create a session collection<!-- Same comment about sentences between headings. -->
+#### Task 2: Create a session collection
 
-##### Create and configure a session collection<!-- As far as I can tell, "session collection" should be lowercase. If you agree, please s/r. I'll stop marking these. --> using Server Manager
+##### Create and configure a session collection using Server Manager
 
-> **NOTE**: RDS in Windows Server supports two types of Session Collections on a single RD Session Host: an RD Session Collection<!-- Should this be "RD Session Host collection?" If so, please define RD Session Host first mention as "Remote Desktop Session Host." However, if you keep this as RD Session Collection and but change "session collection" to lowercase as previously recommended, we'll need to define first mention of RD as "Microsoft Remote Desktop session collection." This is because first mention of Remote Desktop as a standalone term is "Microsoft Remote Desktop." -->, or a RemoteApp Session Collection. You cannot run both session collection types on the same RD Session Host by default. Therefore, when you're doing this exercise, you will first create an RD Session Host collection and verify that it works and then create a RemoteApp Session collection and verify that as well.
+> **NOTE**: RDS in Windows Server supports two types of Session Collections on a single RD Session Host: an RD Session Collection, or a RemoteApp Session Collection. You cannot run both session collection types on the same RD Session Host by default. Therefore, when you're doing this exercise, you will first create an RD Session Host collection and verify that it works and then create a RemoteApp Session collection and verify that as well.
 
 1. On **SEA-RDS1**, on the **Remote Desktop Service Overview** page, select **Collections**.
 2. Under **COLLECTIONS**, select **TASKS**, and then select **Create Session Collection**. You might need to scroll to access this option.
 3. On the **Before you begin** page, select **Next**.
 4. On the **Name the collection** page, in the **Name** field, enter **IT**, and then select **Next**.
-5. On the **Specify RD Session Host servers** page, in the **Server Pool** section, select **SEA-RDS1.Contoso.com**<!-- Again, this is a live link. I'll stop mentioning these, but to spot them, open the preview pane. -->, and then select **Next**.
-6. On the **Specify user groups** page, remove **CONTOSO\Domain Users**, and then select **Add**. Add it<!-- What is "it?" -->, and then select **OK**. Verify that **CONTOSO\IT** is listed under **User Groups**, and then select **Next**.
+5. On the **Specify RD Session Host servers** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**, and then select **Next**.
+6. On the **Specify user groups** page, remove **CONTOSO\Domain Users**, and then select **Add**. Add the **CONTOSO\IT** group and then select **OK**. Verify that **CONTOSO\IT** is listed under **User Groups**, and then select **Next**.
 7. On the **Specify user profile disks** page, clear the **Enable user profile disks** check box, and then select **Next**.
 8. On the **Confirm selections** page, select **Cancel**.
 1. When prompted, select **Yes**. Then
@@ -116,7 +116,7 @@ The main tasks for this exercise are as follows:
 
 ##### Create and configure a session collection using Windows PowerShell
 
-> **NOTE**:<!-- Same comment about making this normal text. And if you do, delete the second sentence. --> We will now create and configure the session collection using Windows PowerShell. The previous steps were included to demonstrate how to create a session collection using Server Manager.
+> **NOTE**: We will now create and configure the session collection using Windows PowerShell. The previous steps were included to demonstrate how to create a session collection using Server Manager.
 
 1. On **SEA-RDS1**, open Windows PowerShell.
 1. At the command prompt, enter the following command, and then select Enter:<br>
@@ -175,10 +175,10 @@ The main tasks for this exercise are as follows:
 #### Task 4: Connect to the Session Collection from RD Web portal
 
 1. On **SEA-CL1**, Open **Microsoft Edge**.
-1. In Microsoft Edge, browse to **https://SEA-RDS1.Contoso.com/rdweb**.
-1. On the **This site is not secure** page, select **Details**,<!-- Should they briefly review the details? --> and then select **Go on to the webpage**.
+1. In Microsoft Edge, browse to **```https://SEA-RDS1.Contoso.com/rdweb```**.
+1. On the **This site is not secure** page, select **Details**, and then select **Go on to the webpage**.
 
-> **NOTE**: This page opens because RD Web<!-- Which RD Web? RD Web Access? RD Web Portal? --> is using a self-signed certificate that is not trusted by the client. In a real production deployment, you would use trusted certificates.
+> **NOTE**: This page opens because RD Web is using a self-signed certificate that is not trusted by the client. In a real production deployment, you would use trusted certificates.
 
 2. On the **RD Web Access** page, sign-in using **contoso\jane** as the user name, and password as **Password**. If prompted by **Microsoft Edge** to save the password, select **Never**.
 3. On the **RD Web Access** page, under **Current folder: /**, select **IT**, and when prompted, select **Open**.
@@ -186,8 +186,8 @@ The main tasks for this exercise are as follows:
 
 > **NOTE**: This prompts the **Unknown publisher** pop up window because certificates for RDS have not yet been configured.
 
-5. In the **Windows Security** dialog box, use **Pa55w.rd** as the password, and then select Enter<!-- Verify -->.
-1. After the connection completes, on **SEA-RDS1**<!-- Can we delete the machine name? If they are on it, do they need this? -->, sign out of the session.
+5. In the **Windows Security** dialog box, use **Pa55w.rd** as the password, and then select Enter.
+1. After the connection completes, on **SEA-RDS1**, sign out of the session.
 1. Sign out of the RD Web portal and close **Microsoft Edge**.
 
 ##### Verify User Profile Disk creation
@@ -198,13 +198,13 @@ The main tasks for this exercise are as follows:
 `cd RDSUserProfiles`<br>
 3. Enter the following command, and then select Enter:<br>
 `dir`<br>
-4. Examine the contents of the **RDSUserProfiles** folder. Verify that there is a **.vhdx** file with an SID (a long string that starts with **S-1-5-21**) in its name<!-- I deleted the text, "in the **C:\RDSUserProfiles** folder," because we've already told them in this step to examine the contents in that folder. Please verify this is okay to delete. -->.
+4. Examine the contents of the **RDSUserProfiles** folder. Verify that there is a **.vhdx** file with an SID (a long string that starts with **S-1-5-21**) in its name.
 
-### Exercise 2: Configure RemoteApp collection settings<!-- Same comment about sentences between headings. -->
+### Exercise 2: Configuring RemoteApp collection settings
 
 ### Scenario
 
-<!-- Again, this not a scenario. -->In this exercise, you will explore how to add RemoteApp Programs to RDS using both Server Manager and Windows PowerShell. You will then run a RemoteApp Program from the RD Web portal.
+In this exercise, you will explore how to add RemoteApp Programs to RDS using both Server Manager and Windows PowerShell. You will then run a RemoteApp Program from the RD Web portal.
 
 The main tasks for this exercise are as follows:
 
@@ -234,10 +234,10 @@ The main tasks for this exercise are as follows:
 
 #### Task 3: Run RemoteApp from RD Web portal
 
-1. On **SEA-CL1**, open **Microsoft Edge**, and brwose to **https://SEA-RDS1.Contoso.com/rdweb**.
+1. On **SEA-CL1**, open **Microsoft Edge**, and brwose to **```https://SEA-RDS1.Contoso.com/rdweb```**.
 1. On the **This site is not secure page**, select **Details**, and then select **Go on to the webpage**.
 
-> **NOTE**: This page opens because RD Web<!-- Which RD Web? RD Web Access? RD Web Portal? --> is using a self-signed certificate that is not trusted by the client. In a real production deployment, you would use trusted certificates.
+> **NOTE**: This page opens because RD Web is using a self-signed certificate that is not trusted by the client. In a real production deployment, you would use trusted certificates.
 
 2. On the **RD Web Access** page, sign-in as **contoso\jane** using **Pa55w.rd** as the password.
 3. On the **RD Web Access** page, run **Paint**, and when prompted, select **Open**.
@@ -248,14 +248,14 @@ The main tasks for this exercise are as follows:
 4. In the **Windows Security** dialog box, use **Pa55w.rd** as the password.
 1. Wait for the **Paint** RemoteApp program to start, and then test its functionality.
 1. Close **Paint**. and back
-1. Back in the RD Web portal**RD Web<!-- Can you fix this? I'm not sure whether it should be RD Web portal, or something else. -->, sign out.
+1. Back in the RD Web portal**RD Web, sign out.
 1. Close Microsoft Edge.
 
-### Exercise 3: Configure a virtual desktop template<!-- Same comment about sentences between headings. -->
+### Exercise 3: Configure a virtual desktop template
 
 ### Scenario
 
-<!-- Same comment about this not being a scenario. -->In this exercise, you will explore how to manually configure a virtual desktop template. The Hyper-V VM, you are using has already been created.
+In this exercise, you will explore how to manually configure a virtual desktop template. The Hyper-V VM, you are using has already been created.
 
 The main tasks for this exercise are as follows:
 
@@ -280,7 +280,7 @@ The main tasks for this exercise are as follows:
 1. On **SEA-CL1**, and then open **Services**.
 2. In the **Services** window, right-click or access the context menu for **Background Intelligent Transfer Service**.
 3. In the **Background Intelligent Transfer Service Properties (Local Computer)** dialog box, on the **General** tab, select **Stop**.
-4. In the **Startup type** box<!-- What type of box? Text box? Dialog box?.  Is it perhaps not a box at all?-->, select **Disabled**, and then select **OK**.
+4. In the **Startup type** box, select **Disabled**, and then select **OK**.
 5. Repeat steps 2 through 4 for the following services:
 
 - **Diagnostic Policy Service**
@@ -303,4 +303,4 @@ The main tasks for this exercise are as follows:
 4. In the **Shutdown Options** box, select **Shutdown**, and then select **OK**.
 5. Wait while Sysprep completes and shuts down the VM.
 
-After completing this exercise, you will have prepared a Hyper-V VM to be a virtual desktop template.<!-- Don't these go under the Exercise headings? You  might check your template to see whether we're still using these types of sentences. -->
+After completing this exercise, you will have prepared a Hyper-V VM to be a virtual desktop template.

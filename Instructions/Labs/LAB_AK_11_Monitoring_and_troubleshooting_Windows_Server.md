@@ -9,6 +9,8 @@ lab:
 
 ### Exercise 1: Establishing a performance baseline
 
+> **Note**: After starting the Data Collector Set, there might be a delay of 10 minutes for the results to appear.
+
 #### Task 1: Create and start a data collector set
 
 1. Switch to **SEA-ADM1**.
@@ -55,13 +57,13 @@ lab:
 5. At the command prompt, enter the following command, and then select Enter:
 
     ```powershell
-    Del bigfile *.*
+    Del bigfile*.*
     ```
 
 6. At the command prompt, enter the following command, and then select Enter:
 
     ```powershell
-    Del \\SEA-dc1\c$\bigfile *.*
+    Del \\SEA-dc1\c$\bigfile*.*
     ```
 
 7. Don't close the **Command Prompt** window.

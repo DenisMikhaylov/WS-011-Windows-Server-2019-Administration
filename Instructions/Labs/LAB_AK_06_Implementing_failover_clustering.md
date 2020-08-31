@@ -5,13 +5,13 @@ lab:
     module: 'Module 6: High availability in Windows Server'
 ---
 
-# Lab: Implementing failover clustering
+# Lab answer key: Implementing failover clustering
 
 ## Exercise 1: Configuring iSCSI storage
 
 ### Task 1: Install Failover Clustering
 
-1. On **SEA-ADM1**, select **Start**, right-click or access the context menu for **Windows PowerShell**, and then select **Run as Administrator**.
+1. On **SEA-ADM1**, select **Start**, right-click or access the context menu for **Windows PowerShell**, and then select **Run as Administrator**. 
 
 1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
 
@@ -43,7 +43,7 @@ lab:
    Enter-PSSession $sess
    ```
 
-1. Verify that **[sea-svr2.contoso.com]** appears at the beginning of the command prompt.
+1. Verify that **`sea-svr2.contoso.com`** appears at the beginning of the command prompt.
 
 1. In the **Administrator: Windows PowerShell** window for **SEA-SVR2**, enter the following command, and then select Enter:
 
@@ -73,7 +73,7 @@ lab:
    Enter-PSSession $sess
    ```
 
-1. Verify that **[sea-svr3.contoso.com]** appears at the beginning of the command prompt.
+1. Verify that **`sea-svr3.contoso.com`** appears at the beginning of the command prompt.
 
 1. In the **Administrator: Windows PowerShell** window for **SEA-SVR3**, enter the following command, and then select Enter:
 
@@ -107,7 +107,7 @@ lab:
     Restart-Computer
     ```
 
-1. Wait for 3&ndash;4 minutes for all three servers to restart.
+1. Wait for 3–4 minutes for all three servers to restart.
 
 ### Task 2: Configure iSCSI virtual disks
 
@@ -155,7 +155,7 @@ lab:
      Enter-PSSession $sess
      ```
 
-1. Verify that **[sea-svr2.contoso.com]** appears at the beginning of the command prompt.
+1. Verify that **`sea-svr2.contoso.com`** appears at the beginning of the command prompt.
 
 1. To open another **Windows PowerShell** window to connect to **SEA-SVR3**, on **SEA-ADM1**, select **Start**, right-click or access the context menu for **Windows PowerShell**, and then select **Run as Administrator**.
 
@@ -179,9 +179,9 @@ lab:
      Enter-PSSession $sess
      ```
 
-1. Verify that **[sea-svr3.contoso.com]** appears at the beginning of the command prompt.
+1. Verify that **`sea-svr3.contoso.com`** appears at the beginning of the command prompt.
 
-     >**Note:** You should have three **Windows PowerShell** windows opened. Ensure that you always use the proper PowerShell session window that's connected to the server where you want to run a command.
+     > **Note:** You should have three **Windows PowerShell** windows opened. Ensure that you always use the proper PowerShell session window that's connected to the server where you want to run a command.
 
 1. In the **Administrator: Windows PowerShell** window for **SEA-SVR2**, start the Microsoft iSCSI Initiator service by entering the following commands, each followed by selecting Enter:
 
@@ -276,7 +276,7 @@ After completing this exercise, you should have successfully installed the Failo
 
 1. Switch to **SEA-SVR2**, and then sign in as **Contoso\Administrator** with password **Pa55w.rd**.
 
-    >**Note:** You must sign in on **SEA-SVR2** because you can't run cluster commands over remote PowerShell.
+    > **Note:** You must sign in on **SEA-SVR2** because you can't run cluster commands over remote PowerShell.
 
 1. Enter **PowerShell**, and then select Enter.
 
@@ -311,7 +311,7 @@ After completing this exercise, you should have installed and configured the Fai
 1. On **SEA-ADM1**, open **Server Manager**, and then select **Failover Cluster Manager** in the **Tools** menu.
 1. In the **Failover Cluster Manager** console, select **Connect to Cluster**.
 1. To connect to the cluster that you created in the previous exercise, in the **Select Cluster** window, enter **WFC2019**, and then select **OK**.
-1. Expand **WFC2019.contoso.com**, select **Roles**, and then notice that no roles display. This is because no cluster roles are configured yet.
+1. Expand **`WFC2019.contoso.com`**, select **Roles**, and then notice that no roles display. This is because no cluster roles are configured yet.
 1. Select **Nodes**, and then notice that the **SEA-SVR2** and **SEA-SVR3** nodes both display a status of **Up**.
 1. Expand **Storage**, and then select **Disks**. Notice that three cluster disks have a status of **Online**.
 1. On the **Failover Cluster Manager** page, right-click or access the context menu for **Roles**, and then select **Configure role**.
@@ -371,7 +371,7 @@ After completing this exercise, you should have configured a highly available fi
 1. Try to access **\\\FSCluster** from **SEA-ADM1** to verify that **FSCluster** has moved to another node and that the **\\\FSCluster** location is still available.
 1. Select **Nodes**, and then right-click or access the context menu for the node that has the status of **Down**.
 1. Select **More Actions**, and then select **Start Cluster Service**.
-1. In the **Failover Cluster Manager** console, right-click or access the context menu for the **WFC2019.Contoso.com** cluster, select **More Actions**, and then select **Configure Cluster Quorum Settings**.
+1. In the **Failover Cluster Manager** console, right-click or access the context menu for the **`WFC2019.Contoso.com`** cluster, select **More Actions**, and then select **Configure Cluster Quorum Settings**.
 1. On the **Before you begin** page, select **Next**.
 1. On the **Select Quorum Configuration Options** page, select **Use default quorum configuration**, and then select **Next**.
 1. Select **Next**, and then select **Finish**.

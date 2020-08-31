@@ -22,7 +22,7 @@ Contoso, Ltd. wants to implement several new servers in their environment, and t
 
 VMs: **WS-011T00A-SEA-DC1-B**, **WS-011T00A-SEA-ADM1-B**, **WS-011T00A-SEA-SVR4**
 
-User name: **Contoso\Administrator**
+Username: **Contoso\Administrator**
 
 Password: **Pa55w.rd**
 
@@ -59,7 +59,7 @@ The main tasks for this exercise are as follows:
 
 1. At the command prompt, enter **sconfig**, and then select Enter.
 1. To access **Network Settings**, enter **8**, and then select Enter.
-1. To modify adapter index #1, enter **1**, and then select Enter.
+1. To change adapter index #1, enter **1**, and then select Enter.
 1. To set the network adapter address, enter **1**, and then select Enter.
 1. To set a static IP address, enter **S**, and then select Enter.
 1. To set the IP address, enter **172.16.10.15**, and then select Enter.
@@ -69,9 +69,11 @@ The main tasks for this exercise are as follows:
 1. Enter **172.16.10.10**, and then select Enter. Then, to dismiss the message box, select **OK**. To leave the alternate DNS server blank, select Enter.
 1. To return to the main menu, enter **4**, and then select Enter.
 1. To exit to Command Line, enter **15**, and then select Enter.
-1. At the command prompt, Enter **PowerShell**, and then select Enter.
-1. At the PowerShell prompt, enter **Rename-Computer -NewName SEA-SVR4**, and then select Enter.
-1. At the PowerShell prompt, enter **Add-Computer -DomainName Contoso.com -Credential Contoso\Administrator -restart -force**, and then select Enter. In the **Windows PowerShell credential request** window, enter **Pa55w.rd**, and then select **OK**.
+1. At the command prompt, enter **PowerShell**, and then select Enter.
+1. At the PowerShell prompt, enter ```Rename-Computer -NewName SEA-SVR4 -restart -force```, and then select Enter.
+1. On **SEA-SVR4**, select Ctrl+Alt+Del, enter the password **Pa55w.rd**, and then select Enter.
+1. At the command prompt, enter **PowerShell**, and then select Enter.
+1. At the PowerShell prompt, enter ```Add-Computer -DomainName Contoso.com -Credential Contoso\Administrator -restart -force```, and then select Enter. In the **Windows PowerShell credential request** window, enter **Pa55w.rd**, and then select **OK**.
 
 ### Task 3: Install Features on Demand on Server Core
 
@@ -79,8 +81,8 @@ The main tasks for this exercise are as follows:
 1. On SEA-SVR4, select Ctrl+Alt+Del, enter the password **Pa55w.rd**, and then select Enter.
 1. At the command prompt, enter **Explorer.exe**. Note that the command does not run and returns an error.
 1. At the command prompt, enter **PowerShell**, and then select Enter.
-1. At the PowerShell prompt, enter **Add-Windowscapability -Online -Name Servercore.Appcompatibility~~~~0.0.1.0 -Source D:\***.
-1. After completion, to restart the server and then sign in with the password **Pa55w.rd**, at the PowerShell prompt, enter **Restart-computer**.
+1. At the PowerShell prompt, enter ```Add-Windowscapability -Online -Name Servercore.Appcompatibility~~~~0.0.1.0 -Source D:```.
+1. After completion, to restart the server and then sign in with the password **Pa55w.rd** at the PowerShell prompt, enter **Restart-computer**.
 1. At the command prompt, enter **Explorer.exe**. Note that File Explorer now opens successfully.
 
 ### Results
@@ -106,7 +108,7 @@ The main tasks for this exercise are as follows:
 1. Connect to **WS-011T00A-SEA-ADM1-B**.
 1. Select Ctrl+Alt+Del and sign in as **Contoso\Administrator** with a password of **Pa55w.rd**.
 1. From the taskbar, open File Explorer, and then browse to **C:\Labfiles\Mod01**.
-1. Select **WindowsAdminCenter1910.2.msi**, and then select **Run**.
+1. Double-click or select **WindowsAdminCenter1910.2.msi**.
 1. On the **Windows Admin Center Setup** page, to accept the terms, select the check box, and then select **Next**.
 1. On the **Use Microsoft Update to help keep your computer secure and up-to-date** page, select **Next**.
 1. On the **Install Windows Admin Center on Windows Server** page, select **Next**.
@@ -116,41 +118,41 @@ The main tasks for this exercise are as follows:
 ### Task 2: Add servers for remote administration
 
 1. From the taskbar, open Microsoft Edge.
-1. In the address bar, enter **Https://Sea-Adm1**, and then select Enter. The console will open. Notice that the host server is listed by default.
+1. In the address bar, enter ```Https://Sea-Adm1```, and then select Enter. The console will open. Notice that the host server is listed by default.
 1. In Windows Admin Center, select **Add**.
-1. In the **Server name** box, enter **SEA-DC1**, and then select **Add**. In a few moments, the server will be found through DNS.
+1. In the Add resources pane, in the Windows Server box, select **Add**
+1. In the **Server name** box, enter **SEA-DC1**. In a few moments, the server will be found through DNS, and then select **Add**. .
 1. Select **Add**.
 1. Repeat the steps to add **SEA-SVR4**.
 
 ### Task 3: Configure Windows Admin Center extensions
 
-1. In the upper right corner, select the **Settings** icon.
+1. In the upper right corner, select the **Settings** icon (the cog wheel).
 1. In the left pane, select **Extensions**. Note that there are no available extensions.
 1. In the **details** pane, select **Feeds**, and then select **Add**.
 1. In the **Add package source** pane, in the **Extension feed** URL or path, enter **C:\Labfiles\Mod01**, and then select **Add**.
 1. Select **Available extensions**. Now you can observe the extensions.
-1. Select the **DNS (Preview)** extension, and then select **Install**. The extension will install, and Windows Admin Center will refresh.
+1. Select the **DNS (Preview)** extension, and then select **Install**. The extension will install and Windows Admin Center will refresh.
 1. On the top menu, next to **Settings**, select the drop-down arrow, and then select **Server Manager**.
-1. On the **Server connections** page, select the **SEA-DC1.Contoso.com** link.
-1. To install the DNS PowerShell tools, in the left pane, select **DNS**, and then select **Install**. The tools will take a few moments to install.
-1. Select the **Contoso.com** zone and observe the console.
+1. On the **Server connections** page, select the ```SEA-DC1.Contoso.com``` link.
+1. To install the DNS PowerShell tools in the left pane, select **DNS**, and then select **Install**. The tools will take a few moments to install.
+1. Select the ```Contoso.com``` zone and observe the console.
 
 ### Task 4: Verify remote administration
 
-1. In Windows Admin Center, select the **Overview** icon. Note that the **details** pane for Windows Admin Centers displays basic server information and performance monitoring, which is similar to **Task Manager**.
+1. In Windows Admin Center, select the **Overview** icon in the left pane. Note that the **details** pane for Windows Admin Centers displays basic server information and performance monitoring, which is like **Task Manager**.
 1. In the left pane, scroll down and observe the basic administration tools available. Select **Roles and Features** and note what is installed and what is available to install. Scroll down and check the box beside **Telnet Client**, and then select **Install**, which will be at the top of the list.
 1. To install the Telnet Client, select **Yes**. In a few moments, you will get a message that the Telnet Client installed successfully.
-1. Select the **Settings** icon.
-1. In the **details** pane, select **Remote Desktop**, select the **Allow remote connections to this computer** radio button, and then select **Save**.
+1. In the **details** pane, select **Remote Desktop**, select **Go to settings**, select the **Allow remote connections to this computer** radio button, and then select **Save**.
 1. Close the browser.
 
 ### Task 5: Administer servers with Remote PowerShell
 
 1. Select **Start**, enter **PowerShell**, and then select Enter.
-1. At the PowerShell prompt, enter **Enter-PSSession -ComputerName SEA-DC1**, and then select Enter.
-1. Enter **Get-Service -Name AppIDSvc**, and then select Enter. Note that the service is currently stopped.
-1. Enter **Start-Service -Name AppIDSvc**, and then select Enter.
-1. Enter **Get-Service -Name AppIDSvc**, and then select Enter. Note that the service is currently running.
+1. At the PowerShell prompt, enter ```Enter-PSSession -ComputerName SEA-DC1```, and then select Enter.
+1. Enter ```Get-Service -Name AppIDSvc```, and then select Enter. Note that the service is currently stopped.
+1. Enter ```Start-Service -Name AppIDSvc```, and then select Enter.
+1. Enter ```Get-Service -Name AppIDSvc```, and then select Enter. Note that the service is currently running.
 
 ### Results
 
