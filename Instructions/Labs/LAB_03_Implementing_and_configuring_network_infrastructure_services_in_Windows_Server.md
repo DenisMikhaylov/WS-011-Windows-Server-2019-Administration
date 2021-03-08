@@ -74,7 +74,7 @@ The main tasks for this exercise are as follows:
     - Lease duration: **4 days**
 1. In **Server Manager**, open the **DHCP management console**.
 1. In the **DHCP management console**, add all authorized servers.
-1. On the DHCP server **172.16.10.10**, in the **ContosoClients** scope, add the scope option **006 DNS Servers** with the value **172.16.10.10**.
+1. On the DHCP server **172.16.10.12**, in the **ContosoClients** scope, add the scope option **006 DNS Servers** with the value **172.16.10.10**.
 
 ### Task 4: Configure DHCP Failover
 
@@ -121,7 +121,7 @@ The main tasks for this exercise are as follows:
 1. On **SEA-ADM1**, open **Microsoft Edge** and sign in to **Windows Admin Center**.
 1. In **Windows Admin Center**, connect to **SEA-SVR1**.
 1. From **Roles & features**, install the DNS role.
-1. From **DNS**, install the **DHCP PowerShell** tools. If **DNS** is not available in the **Tools pane** for **SEA-SVR1**, close **Microsoft Edge** and sign in to **Windows Admin Center** again.
+1. From **DNS**, install the **DNS PowerShell** tools. If **DNS** is not available in the **Tools pane** for **SEA-SVR1**, close **Microsoft Edge** and sign in to **Windows Admin Center** again.
 
 ### Task 2: Create a DNS zone
 
@@ -159,7 +159,7 @@ The main tasks for this exercise are as follows:
 
 ### Task 5: Configure DNS policies
 
-1. On **SEA-ADM1**, in **Windows Admin Center**, while connected to **SEA-ADM1**, use **PowerShell** to sign in remotely.
+1. On **SEA-ADM1**, in **Windows Admin Center**, while connected to **SEA-SVR1**, use **PowerShell** to sign in remotely.
 1. At the **Windows PowerShell** prompt, run the following command to create a head office subnet:
 
     ```powershell
