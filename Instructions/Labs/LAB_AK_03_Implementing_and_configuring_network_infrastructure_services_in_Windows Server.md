@@ -168,7 +168,7 @@ lab:
 
 ### Task 5: Configure DNS policies
 
-1. On **SEA-ADM1**, in **Windows Admin Center**, in the **Tools** pane, select **PowerShell**.
+1. On **SEA-ADM1**, in **Windows Admin Center**, while connected to **SEA-SVR1**, use **PowerShell** to sign in remotely.
 1. At the **Password** prompt, enter **Pa55w.rd**, and then select **Enter**.
 1. To create a head office subnet, enter the following, and then select Enter:
 
