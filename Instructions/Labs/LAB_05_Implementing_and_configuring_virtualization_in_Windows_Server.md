@@ -90,9 +90,15 @@ The main tasks for this exercise are:
 1. In Microsoft Edge, on the Favorites Bar, select **Windows Admin Center**.
 1. In the Windows Security box, enter **Contoso\Administrator** with the password of **Pa55w.rd** and then select **OK**.
 1. In the **All connections** list, select **SEA-SVR1**.
+
+   >**Note:** You may need to select **Manage As** to then enter the credentials in the next step.
+
 1. In the **Specify your credentials** page, select **Use another account for this connection**, and then enter **Contoso\Administrator** with the password of **Pa55w.rd**.
 1. In the **Tools** list, select **Virtual Machines**. Review the Summary pane.
 1. On SEA-VM1, create a new disk, 5 GB in size.
+
+   >**Note:** The Save Disk Setting may be greyed out which is a known issue. A workaround would be to create the disk in Hyper-V if needed.
+
 1. Start **SEA-VM1** and then display the statistics for the running VM.
 1. Refresh the page and then shut down the VM.
 1. In the **Tools** list, select **Virtual switches** and identify the existing switches.
@@ -118,6 +124,9 @@ The main tasks for this exercise are:
 
 1. On SEA-ADM1, open **Windows Admin Center** using the Contoso\Administrator credentials.
 1. Connect to **SEA-SVR1** using the Contoso\Administrator credentials and then connect to the server using PowerShell.
+
+   >**Note:** The Powershell connection in WAC may be slow due to nested virtualization used in the lab, so an alternate method is to use **Enter-PSSession -computername SEA-SVR1** from a Powershell window on SEA-ADM1.
+
 1. At the PowerShell command prompt enter the following command and then select Enter:
 
    `Install-Module -Name DockerMsftProvider -Repository PSGallery -Force`
@@ -137,6 +146,8 @@ The main tasks for this exercise are:
 
    `Get-Package -Name Docker -ProviderName DockerMsftProvider`
 
+   >**Note:** You may need to run **Start-Service -name Docker** before running the next commands.
+
 1. To verify whether any Docker images are currently pulled, use the following command:
 
    `Docker images`
@@ -145,9 +156,13 @@ The main tasks for this exercise are:
 
    `Docker search Microsoft`
 
+   >**Note:** You may disregard any errors and continue with the next step.
+
 1. To download a server core image, with IIS, that matches the host operating system, run the following command:
 
    `docker pull mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2019`
+
+   >**Note:** This download will take more than 15 minutes to complete.
 
 1. To verify the Docker image that is currently pulled, use the following command:
 
