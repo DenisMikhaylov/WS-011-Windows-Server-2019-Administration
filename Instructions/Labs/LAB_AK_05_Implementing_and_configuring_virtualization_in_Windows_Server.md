@@ -57,6 +57,9 @@ lab:
 1. In Microsoft Edge, on the Favorites Bar, select **Windows Admin Center**.
 1. In the Windows Security box, enter **Contoso\Administrator** with the password of **Pa55w.rd** and then select **OK**.
 1. In the **All connections** list, select **SEA-SVR1**.
+
+      >**Note:** You may need to select **Manage As** to then enter the credentials in the next step.
+
 1. In the **Specify your credentials** page, select **Use another account for this connection**, and then enter **Contoso\Administrator** with the password of **Pa55w.rd**.
 1. In the **Tools** list, select **Virtual Machines**. Review the Summary pane.
 1. Select the **Inventory** tab. Notice the two virtual machines.
@@ -65,6 +68,9 @@ lab:
 1. Select **Add disk**.
 1. Select **Create an empty virtual hard disk** and then in the Size box enter **5** GB.
 1. Select **Save disks settings** and then select **Close**.
+
+   >**Note:** The Save Disk Setting may be greyed out which is a known issue. A workaround would be to create the disk in Hyper-V if needed.
+
 1. On the **Properties** page, select **Start** to start **SEA-VM1**.
 1. Scroll down and display the statistics for the running VM.
 1. Refresh the page and then select **Shut down**. Select **Yes** to confirm.
@@ -88,6 +94,9 @@ After this exercise, you should have used Hyper-V Manager and Windows Admin Cent
 1. On the **All connections** page, select **SEA-SVR1**.
 1. On the **Specify your credentials** page, select **Use another account for this connection**. Provide the **Contoso\Administrator** credentials, and then select **Continue**.
 1. In the **Tools** list, select **PowerShell**. Provide the **Contoso\Administrator** credentials, and then select **Enter**. You are now connected to SEA-SVR1 using a Remote PowerShell connection.
+
+   >**Note:** The Powershell connection in WAC may be slow due to nested virtualization used in the lab, so an alternate method is to use **Enter-PSSession -computername SEA-SVR1** from a Powershell window on SEA-ADM1.
+
 1. At the PowerShell command prompt enter the following command and then select Enter:
 
    `Install-Module -Name DockerMsftProvider -Repository PSGallery -Force`
@@ -109,6 +118,8 @@ After this exercise, you should have used Hyper-V Manager and Windows Admin Cent
 
    `Get-Package -Name Docker -ProviderName DockerMsftProvider`
 
+   >**Note:** You may need to run **Start-Service -name Docker** before running the next commands.
+
 1. To verify whether any Docker images are currently pulled, use the following command:
 
    `Docker images`
@@ -120,11 +131,13 @@ After this exercise, you should have used Hyper-V Manager and Windows Admin Cent
 
    Notice the variety of base images each representing various runtime scenarios.
 
+   >**Note:** You may disregard any errors and continue with the next step.
+
 1. To download a server core image, with IIS, that matches the host operating system, run the following command:
 
    `docker pull mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2019`
 
-   It might take several minutes for the server core image to finish downloading.
+   >**Note:** This download will take more than 15 minutes to complete.
 
 1. To confirm the Docker image that is currently pulled, use the following command:
 
