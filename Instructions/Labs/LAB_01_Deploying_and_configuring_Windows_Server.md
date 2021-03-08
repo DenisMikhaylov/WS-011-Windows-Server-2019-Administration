@@ -61,7 +61,7 @@ The main tasks for this exercise are as follows:
 
    - Default Gateway: **172.16.10.1**
 1. Set the DNS server to be **172.16.10.10**. Leave the alternate DNS server blank.
-1. Return to the main menu.
+1. Return to the main menu and exit to command line.
 1. Open PowerShell.
 1. Run the ```Rename-Computer -NewName SEA-SVR4 -restart -force``` cmdlet.
 1. Sign in and open PowerShell
