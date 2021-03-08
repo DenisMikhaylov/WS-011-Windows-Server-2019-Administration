@@ -437,7 +437,7 @@ For Exercise 4, you will need to start the following VMs using the username **Co
 ### Task 5: Verify Storage Spaces Direct functionality
 
 1. On  **SEA-ADM1**, on the taskbar, select the **File Explorer** icon.
-1. In  **File Explorer**, in the address bar, enter **\\s2d-sofs\VM01**, and then select Enter.
+1. In  **File Explorer**, in the address bar, enter **\\\s2d-sofs\VM01**, and then select Enter.
 2. Create a new folder named **VMFolder**, and then open it.
 3. Switch to the **Administrator: Windows PowerShell ISE** window.
 4. At the Windows PowerShell command prompt, enter the following command, and then select Enter:
