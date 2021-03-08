@@ -189,7 +189,7 @@ The main tasks for this exercise are to:
 1. Verify that you can access the **Docs** folder.
 1. Create a test text document inside this folder.
 1. On **SEA-ADM1**, in the **Failover Cluster Manager** console, move **FSCluster** to another node.
-1. On **SEA-DC1**, in File Explorer, verify that you can still access the **\\\FSCluster** location.
+1. On **SEA-ADM1**, in File Explorer, verify that you can still access the **\\\FSCluster** location.
 
 ### Task 2: Validate the failover and quorum configuration for the File Server role
 
