@@ -26,7 +26,7 @@ Sign in by using the following credentials:
 
 ## Exercise 1: Implementing Web Application Proxy
 
-### Task 1: Install AD FS on LON-DC1
+### Task 1: Install AD FS on SEA-DC1
 
 1. On **SEA-SVR1**, enter **powershell.exe**, and then select Enter.
 1. At the Windows PowerShell prompt, enter `C:\Labfiles\Mod03\InstallADFS.ps1`, and then select Enter.
