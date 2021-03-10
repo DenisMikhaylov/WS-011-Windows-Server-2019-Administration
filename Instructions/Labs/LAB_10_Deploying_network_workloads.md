@@ -39,11 +39,11 @@ Sign in by using the following credentials:
 
 ## Exercise 1: Implementing Web Application Proxy
 
-Contoso has decided to make Windows Admin Center available remotely to administrators. To secure Windows Admin Center, you need to deploy Web Application Proxy. For initial testing, you will use pass-through preauthentication. AD FS is being installed on **LON-SVR1** and Web Application Proxy is being installed on **LON-SVR3**. Certificates are already installed on both servers in preparation for the installation.
+Contoso has decided to make Windows Admin Center available remotely to administrators. To secure Windows Admin Center, you need to deploy Web Application Proxy. For initial testing, you will use pass-through preauthentication. AD FS is being installed on **SEA-SVR1** and Web Application Proxy is being installed on **SEA-SVR3**. Certificates are already installed on both servers in preparation for the installation.
 
 The main tasks for this exercise are as follows:
 
-1. Install AD FS on **LON-SVR1**.
+1. Install AD FS on **SEA-SVR1**.
 1. Create DNS entries for AD FS and Web Application Proxy.
 1. Install Remote Access management tools.
 1. Install Web Application Proxy.
@@ -52,9 +52,9 @@ The main tasks for this exercise are as follows:
 1. Configure Windows Defender Firewall to allow remote access
 1. Test the web application.
 
-### Task 1: Install AD FS on LON-SVR1
+### Task 1: Install AD FS on SEA-SVR1
 
-1. On **LON-SVR1**, at the command prompt, run **powershell.exe**.
+1. On **SEA-SVR1**, at the command prompt, run **powershell.exe**.
 1. At the Windows PowerShell prompt, run **C:\Labfiles\Mod03\InstallADFS.ps1**.
 
 ### Task 2: Create DNS entries for AD FS and Web Application proxy
