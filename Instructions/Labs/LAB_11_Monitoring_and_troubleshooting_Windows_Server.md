@@ -61,12 +61,12 @@ The main tasks for this exercise are:
    - Name: **SEA-ADM1 Performance**
    - Create: **Create manually (Advanced)**
    - Type of data: **Performance counter**
-   - Select the following counters:
+   - Select the following counters (using all default instances):
      - **Memory\Pages/sec**
      - **Network Interface\Bytes Total/sec**
-     - **PhysicalDisk\% Disk Time**
+     - **PhysicalDisk\\% Disk Time**
      - **PhysicalDisk\Avg. Disk Queue Length**
-     - **Processor\% Processor Time**
+     - **Processor\\% Processor Time**
      - **System\Processor Queue Length**
    - Sample interval: **1** second
    - Where to store data: default value
