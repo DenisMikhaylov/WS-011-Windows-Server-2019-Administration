@@ -104,14 +104,14 @@ The main tasks for this exercise are as follows:
 > **NOTE**: RDS in Windows Server supports two types of Session Collections on a single RD Session Host: an RD Session Collection, or a RemoteApp Session Collection. You cannot run both session collection types on the same RD Session Host by default. Therefore, when you're doing this exercise, you will first create an RD Session Host collection and verify that it works and then create a RemoteApp Session collection and verify that as well.
 
 1. On **SEA-RDS1**, on the **Remote Desktop Service Overview** page, select **Collections**.
-1. Under **COLLECTIONS**, select **TASKS**, and then select **Create Session Collection**. You might need to scroll to access this option.
-1. On the **Before you begin** page, select **Next**.
-1. On the **Name the collection** page, in the **Name** field, enter **IT**, and then select **Next**.
-1. On the **Specify RD Session Host servers** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**, and then select **Next**.
-1. On the **Specify user groups** page, remove **CONTOSO\Domain Users**, and then select **Add**. Add the **CONTOSO\IT** group and then select **OK**. Verify that **CONTOSO\IT** is listed under **User Groups**, and then select **Next**.
-1. On the **Specify user profile disks** page, clear the **Enable user profile disks** check box, and then select **Next**.
-1. On the **Confirm selections** page, select **Cancel**.
-1. When prompted, select **Yes**. 
+2. Under **COLLECTIONS**, select **TASKS**, and then select **Create Session Collection**. You might need to scroll to access this option.
+3. On the **Before you begin** page, select **Next**.
+4. On the **Name the collection** page, in the **Name** field, enter **IT**, and then select **Next**.
+5. On the **Specify RD Session Host servers** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**, and then select **Next**.
+6. On the **Specify user groups** page, remove **CONTOSO\Domain Users**, and then select **Add**. Add the **CONTOSO\IT** group and then select **OK**. Verify that **CONTOSO\IT** is listed under **User Groups**, and then select **Next**.
+7. On the **Specify user profile disks** page, clear the **Enable user profile disks** check box, and then select **Next**.
+8. On the **Confirm selections** page, select **Cancel**.
+1. When prompted, select **Yes**.
 1. Minimize **Server Manager**.
 
 ##### Create and configure a session collection using Windows PowerShell
@@ -131,9 +131,9 @@ The main tasks for this exercise are as follows:
 ##### Configure device redirection settings
 
 1. On SEA-RDS1, select the **IT** collection. Next to **PROPERTIES**, select **TASKS**, and then select **Edit Properties**.
-1. On the **Session Collection** page, select the various settings and notice how the collection is configured.
-1. select **Client Settings**, and verify that **Audio and video playback** and **Audio recording** is enabled.
-1. select **User Profile Disks**, and verify that **User Profiles Disks** is not enabled.
+2. On the **Session Collection** page, select the various settings and notice how the collection is configured.
+3. select **Client Settings**, and verify that **Audio and video playback** and **Audio recording** is enabled.
+4. select **User Profile Disks**, and verify that **User Profiles Disks** is not enabled.
 1. In the **IT Properties** dialog box, select **Cancel**.
 1. Minimize **Server Manager**.
 1. In the Windows PowerShell window, enter the following command, and then select Enter:<br>`Get-RDSessionCollectionConfiguration –CollectionName IT –Client | Format-List`
@@ -166,8 +166,8 @@ The main tasks for this exercise are as follows:
 - `$acl.SetAccessRule($AccessRule)`
 - `$acl | Set-Acl C:\RDSUserProfiles`
 
-1. Verify that each command executes successfully.
-1. Switch to **SEA-RDS1**, and select the **IT** collection.
+2. Verify that each command executes successfully.
+3. Switch to **SEA-RDS1**, and select the **IT** collection.
 1. Next to ****PROPERTIES**, select **TASKS**, and then select **Edit Properties**.
 1. On the **Session Collection** page, select **User Profile Disks**, and then select **Enable user profile disks**.
 1. In the **Location** field, enter **\\\SEA-DC1\RDSUserProfiles**. In the **Maximum size (in GB)**, enter **10**, and then select **OK**.
@@ -175,20 +175,20 @@ The main tasks for this exercise are as follows:
 #### Task 4: Connect to the Session Collection from RD Web portal
 
 1. On **SEA-CL1**, Open **Microsoft Edge**.
-1. In Microsoft Edge, browse to **```https://SEA-RDS1.Contoso.com/rdweb```**.
-1. On the **This site is not secure** page, select **Details**, and then select **Go on to the webpage**.
+2. In Microsoft Edge, browse to **```https://SEA-RDS1.Contoso.com/rdweb```**.
+3. On the **This site is not secure** page, select **Details**, and then select **Go on to the webpage**.
 
-   > **NOTE**: This page opens because RD Web is using a self-signed certificate that is not trusted by the client. In a real production deployment, you would use trusted certificates.
+> **NOTE**: This page opens because RD Web is using a self-signed certificate that is not trusted by the client. In a real production deployment, you would use trusted certificates.
 
-1. On the **RD Web Access** page, sign-in using **contoso\jane** as the user name, and password as **Password**. If prompted by **Microsoft Edge** to save the password, select **Never**.
-1. On the **RD Web Access** page, under **Current folder: /**, select **IT**, and when prompted, select **Open**.
-1. In the **Remote Desktop Connection** dialog box, select **Connect**.
+4. On the **RD Web Access** page, sign-in using **contoso\jane** as the user name, and password as **Password**. If prompted by **Microsoft Edge** to save the password, select **Never**.
+5. On the **RD Web Access** page, under **Current folder: /**, select **IT**, and when prompted, select **Open**.
+6. In the **Remote Desktop Connection** dialog box, select **Connect**.
 
-   > **NOTE**: This prompts the **Unknown publisher** pop up window because certificates for RDS have not yet been configured.
+> **NOTE**: This prompts the **Unknown publisher** pop up window because certificates for RDS have not yet been configured.
 
-1. In the **Windows Security** dialog box, use **Pa55w.rd** as the password, and then select Enter.
-1. After the connection completes, on **SEA-RDS1**, sign out of the session.
-1. Sign out of the RD Web portal and close **Microsoft Edge**.
+7. In the **Windows Security** dialog box, use **Pa55w.rd** as the password, and then select Enter.
+8. After the connection completes, on **SEA-RDS1**, sign out of the session.
+9. Sign out of the RD Web portal and close **Microsoft Edge**.
 
 ##### Verify User Profile Disk creation
 
@@ -235,21 +235,21 @@ The main tasks for this exercise are as follows:
 #### Task 3: Run RemoteApp from RD Web portal
 
 1. On **SEA-CL1**, open **Microsoft Edge**, and brwose to **```https://SEA-RDS1.Contoso.com/rdweb```**.
-1. On the **This site is not secure page**, select **Details**, and then select **Go on to the webpage**.
+2. On the **This site is not secure page**, select **Details**, and then select **Go on to the webpage**.
 
-   > **NOTE**: This page opens because RD Web is using a self-signed certificate that is not trusted by the client. In a real production deployment, you would use trusted certificates.
+> **NOTE**: This page opens because RD Web is using a self-signed certificate that is not trusted by the client. In a real production deployment, you would use trusted certificates.
 
-1. On the **RD Web Access** page, sign-in as **contoso\jane** using **Pa55w.rd** as the password.
-1. On the **RD Web Access** page, run **Paint**, and when prompted, select **Open**.
-1. In the **Remote Desktop Connection** dialog box, select **Connect**.
+3. On the **RD Web Access** page, sign-in as **contoso\jane** using **Pa55w.rd** as the password.
+4. On the **RD Web Access** page, run **Paint**, and when prompted, select **Open**.
+5. In the **Remote Desktop Connection** dialog box, select **Connect**.
 
-   > **NOTE**: The **Unknown publisher** pop-up window displays because you have not yet configured certificates for RDS.
+> **NOTE**: The **Unknown publisher** pop-up window displays because you have not yet configured certificates for RDS.
 
-1. In the **Windows Security** dialog box, use **Pa55w.rd** as the password.
-1. Wait for the **Paint** RemoteApp program to start, and then test its functionality.
-1. Close **Paint**. 
-1. Back in the RD Web portal**RD Web, sign out.
-1. Close Microsoft Edge.
+6. In the **Windows Security** dialog box, use **Pa55w.rd** as the password.
+7. Wait for the **Paint** RemoteApp program to start, and then test its functionality.
+8. Close **Paint**.
+9. Back in the RD Web portal**RD Web, sign out.
+10. Close Microsoft Edge.
 
 ### Exercise 3: Configure a virtual desktop template
 

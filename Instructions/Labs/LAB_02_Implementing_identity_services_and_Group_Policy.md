@@ -198,7 +198,7 @@ The main tasks for this exercise are as follows:
 1. On **SEA-ADM1**, in **Group Policy Management Console**, select the **Seattle Application Override** GPO. Notice that in the **Security Filtering** section, the GPO applies by default to all authenticated users.
 1. In the **Security Filtering** section, remove **Authenticated Users**, add the **SeattleBranchUsers** group, and **SEA-CL1**.
 
-> **Note**: Note: You may need to sign off and sign back on as Contoso\Ty on SEA-CL1 before preceding with the next step.
+   > **Note**: You may need to sign off and sign back on as Contoso\Ty on **SEA-CL1** before preceding with the next step.
 
 #### Task 7: Verify the application of settings
 
@@ -242,13 +242,13 @@ The main tasks for this exercise are as follows:
 
 1. Switch to **Windows PowerShell** and run the following command:
 
-   ```powershell
-   Install-WindowsFeature Web-Server -IncludeManagementTools
-   ```
+```powershell
+Install-WindowsFeature Web-Server -IncludeManagementTools
+```
 
 1. Open **Server Manager**, and then open **Internet Information Services (IIS) Manager**.
 
-   > **Note**: You may need to restart Certificate Services on SEA-DC1 for the next step to work.
+   > **Note**: You may need to restart Certificate Services on **SEA-DC1** for the next step to work.
 
 1. Enroll for a domain certificate by using the following settings:
 

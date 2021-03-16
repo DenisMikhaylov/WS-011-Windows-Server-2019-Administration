@@ -208,7 +208,7 @@ lab:
 9. In the **Object Types** dialog box, select the **Computers** check box and then select **OK**.
 10. In the **Select User, Computer, or Group** dialog box, in the **Enter Object Names to select (Examples)** text box, enter **SEA-CL1**, and then select **OK**.
 
-> **Note**: Note: You may need to sign off and sign back on as Contoso\Ty on SEA-CL1 before preceding with the next step.
+   > **Note**: You may need to sign off and sign back on as Contoso\Ty on SEA-CL1 before preceding with the next step.
 
 ### Task 7: Verify the application of settings
 
@@ -251,8 +251,7 @@ lab:
    ```powershell
    Install-WindowsFeature Web-Server -IncludeManagementTools
    ```
-
-   > **Note**: You may need to restart Certificate Services on SEA-DC1 for the next step to work.
+   > **Note**: You may need to restart Certificate Services on **SEA-DC1** for the next step to work.
 
 1. From **Server Manager**, select **Tools**, and then select **Internet Information Services (IIS) Manager**.
 1. Select **SEA-ADM1**, and then in the central pane, double-click **Server Certificates** or select it and then select Enter.
