@@ -48,7 +48,7 @@ The main tasks for this exercise are:
 ### Task 1: Install the Data Deduplication role service
 
 1. On **SEA-ADM1**, in Server Manager, add the **Data Deduplication** role to **SEA-SVR3** (under File and Storage Services, and then under File and iSCSI Services).
-1. Share the (**SEA-ADM1**) **C:\Labfiles** folder.
+1. Share the (**SEA-ADM1**) **C:\Labfiles** folder adding the **Users** group with **Read** access.
 1. On **SEA-SVR3**, in Windows PowerShell, create a virtual disk on **SEA-SVR3** from disk 1, and label it drive **M**. Use the following commands to complete this:
 
    ```
@@ -85,30 +85,29 @@ The main tasks for this exercise are:
 
 1. On **SEA-ADM1**, open **WAC**.
 1. Connect to **SEA-SVR3**, and then open the **PowerShell** node.
-2. Execute the following command to start Data Deduplication process, and then select Enter:
+1. Execute the following command to start Data Deduplication process, and then select Enter:
 
-   ```powershell
-   Start-DedupJob m: -Type Optimization –Memory 50
-   ```
+      ```powershell
+      Start-DedupJob m: -Type Optimization –Memory 50
+      ```
 
-3. Switch to the **File Explorer** window, and then browse to **E:\Labfiles\Mod02\Data**.
-4. Observe the **Size** and **Size on disk** property values for the **report.xlsx** file.
-5. Wait for 5 to 10 minutes to allow the deduplication job to run.
-6. Switch back to the Windows PowerShell window on **SEA-ADM1**.
-7. To verify the Data Deduplication status, run the following commands, selecting Enter at the end of each line:
+1. Switch to SEA-SVR3. In the Command Prompt window, enter Dir. Observe the Bytes free size on property values for the Data Directory.
+1. Wait for 5 to 10 minutes to allow the deduplication job to run.
+1. Switch back to the Windows PowerShell window on **SEA-ADM1**.
+1. To verify the Data Deduplication status, run the following commands, selecting Enter at the end of each line:
 
-   ```powershell
-   Get-DedupStatus –Volume M: | fl
+      ```powershell
+      Get-DedupStatus –Volume M: | fl
 
-   Get-DedupVolume –Volume M: |fl
+      Get-DedupVolume –Volume M: |fl
 
-   Get-DedupMetadata –Volume M: |fl
+      Get-DedupMetadata –Volume M: |fl
 
-   ```
+      ```
 
-8. In Server Manager, select **File and Storage Services**, select Disk **1**, and then select Volume **M** (You might have to refresh).
-9. Observe the values for **Deduplication Rate** and **Deduplication Savings**.
-10. Close all open windows except **Server Manager**.
+1. In Server Manager, select **File and Storage Services**, select Disk **1**, and then select Volume **M** (You might have to refresh).
+1. Observe the values for **Deduplication Rate** and **Deduplication Savings**.
+1. Close all open windows except **Server Manager**.
 
 > When you have finished the exercise, revert the VMs to their initial state.
 
@@ -213,54 +212,54 @@ To meet some requirements for high availability, you decided to evaluate redunda
 The main tasks for this exercise are:
 
 1. Create a storage pool by using the iSCSI disks attached to **SEA-SVR3**.
-2. Create a three-way mirrored disk on **SEA-SVR3**.
-3. Copy a file to the volume on the three-way mirror, and verify it's present in File Explorer.
-4. Disconnect the disk and verify file availability.
-5. Add a new disk to storage pool.
+1. Create a three-way mirrored disk on **SEA-SVR3**.
+1. Copy a file to the volume on the three-way mirror, and verify it's present in File Explorer.
+1. Disconnect the disk and verify file availability.
+1. Add a new disk to storage pool.
 
 > **Note:** In **Windows Server 2019**, you can't disconnect a disk in a storage pool. You can only remove it. You also can't remove a disk from a three-way mirror without adding a new disk first.
 
 ### Task 1: Create a storage pool by using the iSCSI disks attached to the server
 
 1. On **SEA-ADM1**, open Server Manager.
-2. In Server Manager, in **File and Storage Services**, select **Disks**.
+1. In Server Manager, in **File and Storage Services**, select **Disks**.
 1. Set the disks 1-4 for **SEA-SVR3** to **Online**.
-3. In Server Manager, on **SEA-SVR3**, create a new storage pool named **SP1**.
+1. In Server Manager, on **SEA-SVR3**, create a new storage pool named **SP1**.
 1. Use three of the four available disks to make up the pool.
 
 ### Task 2: Create a three-way mirrored disk
 
 1. In Server Manager, in **Storage Pools**, in **SP1**, create a new virtual disk named **Three-Mirror** that uses a mirror storage layout, and thin provisioning. Use **25 GB** for the size.
-2. Create a new volume from **Three**-**Mirror** named **TestData**.
+1. Create a new volume from **Three**-**Mirror** named **TestData**.
 1. Format it as ReFS, and assign it drive letter **T**.
-3. Close Server Manager.
+1. Close Server Manager.
 
 ### Task 3: Copy a file to the volume, and verify it's present in File Explorer
 
 1. Switch to **SEA-SVR3**.
 1. In Windows PowerShell, enter the following command, and then select Enter:
 
-   ```
-   netsh advfirewall firewall set rule group=&quot;File and Printer Sharing&quot; new enable=Yes
-   ```
+      ```
+      netsh advfirewall firewall set rule group=&quot;File and Printer Sharing&quot; new enable=Yes
+      ```
 
-2. Switch back to **SEA-ADM1**.
-3. Create a new folder named **Test Data**, and then create a new document named **Document1.txt** in that folder.
+1. Switch back to **SEA-ADM1**. In the **File Explorer** window, in the **Address bar**, enter **\\\\sea-svr3\t$**.
+1. Create a new folder named **Test Data**, and then create a new document named **Document1.txt** in that folder.
 
 ### Task 4: Disconnect the disk and verify file availability
 
 1. In Server Manager, on **SEA-ADM1**, add a new physical disk to storage pool **SP1**. Ensure the disk uses automatic allocation.
-2. Remove the top disk in the **PHYSICAL DISKS** pane from the storage pool.
-3. Return to **Document1.txt**, add some text, and then save it.
+1. Remove the top disk in the **PHYSICAL DISKS** pane from the storage pool.
+1. Return to **Document1.txt**, add some text, and then save it.
 
 ### Task 5: Add a new disk to the storage pool
 
 1. In Server Manager, re-scan the **SP1** storage pool.
-2. Add the disk you removed earlier, ensuring it's allocated automatically.
-3. Open **Document1.txt**, add some more text, and then save it.
-4. Switch back to **SEA-SVR3**.
+1. Add the disk you removed earlier, ensuring it's allocated automatically.
+1. Open **Document1.txt**, add some more text, and then save it.
+1. Switch back to **SEA-SVR3**.
 1. On drive **T**, in the new **Test Data** folder, open **Document1.txt**.
-5. Close all open windows.
+1. Close all open windows.
 
 > When you have finished the exercise, revert the VMs to their initial state.
 
@@ -282,11 +281,15 @@ The main tasks for this exercise are:
 
 1. On **SEA-ADM1**, open Server Manager.
 1. Ensure all servers refer to **Manageability** of **Online-Performance counters not started**.
-2. Open Windows PowerShell ISE and load the **C:\Labfiles\Mod04\Implement-StorageSpacesDirect.ps1** script.
+1. In Server Manager, in the navigation pane, select File and Storage Services, and then select Disks.
+1. In the Disks pane, scroll until you find SEA-SVR3 disks 1 through 4, and note that they are set to Unknown.
+1. Right-click or access the context menu for each offline disk, select Bring Online, and then in the Bring Disk Online window, select Yes.
+1. Verify that all disks are online for SEA-SVR1 and SEA-SVR2.
+1. Open Windows PowerShell ISE and load the **C:\Labfiles\Mod04\Implement-StorageSpacesDirect.ps1** script.
 
    >**Note:** This script is divided into numbered steps. There are eight steps, and each step has a number of commands. Run the commands by highlighting each and selecting **F8**, one after the other in accordance with the following instructions. Ensure each step finishes, that is, goes from Stop operation (a red square) to Run selection (a green arrow) in the menu bar, before starting the next step.
 
-3. Run the commands in Step 1. This command installs the Failover Clustering role service on **SEA-SVR1**, **SEA-SVR2** and **SEA-SVR3**. The second command restarts the three servers, which is required to complete the install, and the third command installs the Failover Cluster Manager console on **SEA-ADM1**.
+1. Run the commands in Step 1. This command installs the Failover Clustering role service on **SEA-SVR1**, **SEA-SVR2** and **SEA-SVR3**. The second command restarts the three servers, which is required to complete the install, and the third command installs the Failover Cluster Manager console on **SEA-ADM1**.
 
 > **Note:** When you start the second command to restart the servers, you can run the third command to install the console without waiting for the second command's restarts to finish.
 
@@ -315,7 +318,7 @@ The main tasks for this exercise are:
 
 ### Task 5: Verify Storage Spaces Direct functionality
 
-1. On **SEA-ADM1**, in **File Explorer**, create a folder named **VMFolder**.
+1. On **SEA-ADM1**, in **File Explorer**, open **\\\s2d-sofs\VM01** and create a folder named **VMFolder**.
 2. In **Windows PowerShell ISE**, enter the following command, and then select Enter:
 
     ```Stop-Computer -ComputerName SEA-SVR3```
