@@ -208,7 +208,7 @@ lab:
      - Disk size: **5 GB**, **Dynamically Expanding**
      - iSCSI target: **iSCSIFarm**
 
-19. On **SEA-DC1**, in the Command Prompt window, enter **PowerShell.**.
+19. On **SEA-DC1**, in the Command Prompt window, enter **PowerShell**.
 20. In the **Windows PowerShell** window, enter the following commands, selecting **Enter** after each command:
 
      ```
@@ -282,7 +282,7 @@ lab:
 2. In the **VIRTUAL DISKS** area, select **TASKS**, and then select **New Virtual Disk**.
 3. In the **Select the storage pool** dialog box, select **SP1**, and then select **OK**.
 4. In the **New Virtual Disk Wizard**, on the **Before you begin** page, select **Next**.
-5. On the **Specify the virtual disk name** page, in the **Name** text box, enter **Three-Mirror**,and then select **Next**.
+5. On the **Specify the virtual disk name** page, in the **Name** text box, enter **Three-Mirror**, and then select **Next**.
 6. On the **Specify enclosure resiliency** page, select **Next**.
 7. On the **Select the storage layout** page, select **Mirror**, and then select **Next**.
 8. On the **Specify the provisioning enter** page, select **Thin**, and then select **Next**.
@@ -380,7 +380,7 @@ For Exercise 4, you will need to start the following VMs using the username **Co
 6. When **Windows PowerShell ISE** completes loading, select **File**, select **Open**, and then navigate to **C:\Labfiles\Mod04**.
 1. Select **Implement-StorageSpacesDirect.ps1**, and then select **Open**.
 
-    > **Note**: The script is divided into numbered steps. There are eight steps, and each step has a number of commands. Run the commands by highlighting each command and pressing **F8**, one after the other in accordance with the following instructions.Ensure each step finishes, that is, goes from Stop operation (a red square) to a Run selection (green arrow) in the menu bar, before starting the next.
+    > **Note**: The script is divided into numbered steps. There are eight steps, and each step has a number of commands. Run the commands by highlighting each command and pressing **F8**, one after the other in accordance with the following instructions. Ensure each step finishes, that is, goes from Stop operation (a red square) to a Run selection (green arrow) in the menu bar, before starting the next.
 
 7. Select the line in step 1, that is, highlight the entire line, starting with the first **Invoke-Command**, and then select **F8**.
 8. Wait until the installation finishes, and then verify that the output of the command includes four lines (one for each server) with **Success** as **True**.
