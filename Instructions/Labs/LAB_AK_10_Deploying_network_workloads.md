@@ -43,14 +43,14 @@ Sign in by using the following credentials:
 1. When the DNS PowerShell tools installation is complete, select **```Contoso.com```**, and then select **Create new DNS record**.
 1. In the **Create a new DNS record** dialog box, enter the following information, and then select **Create**:
     - DNS record type: **Host (A)**
-    - Record name: **remoteapp**
-    - IP address: **172.16.10.14**
-    - Time to live: **3600**
+    - Record name: **```remoteapp```**
+    - IP address: **```172.16.10.14```**
+    - Time to live: **```3600```**
 1. Select **Create a new DNS record**, enter the following information, and then select **Create**:
     - DNS record type: **Host (A)**
-    - Record name: **fs**
-    - IP address: **172.16.10.12**
-    - Time to live: **3600**
+    - Record name: **```fs```**
+    - IP address: **```172.16.10.12```**
+    - Time to live: **```3600```**
 
 ### Task 3: Install Remote Access management tools
 
@@ -77,8 +77,8 @@ Sign in by using the following credentials:
 1. In the **Web Application Proxy Configuration Wizard**, select **Next**.
 1. On the **Federation Server** screen, enter the following information, and then select **Next**:
     - Federation service name: **```fs.Contoso.com```**
-    - User name: **Contoso\Administrator**
-    - Password: **Pa55w.rd**
+    - User name: **```Contoso\Administrator```**
+    - Password: **```Pa55w.rd```**
 1. On the **AD FS Proxy Certificate** screen, in the **Select a certificate to be used by the AD FS proxy** box, select **```fs.contoso.com```**, and then select **Next**.
 1. On the **Confirmation** screen, read the information, and then select **Configure**.
 1. On the **Results** screen, select **Close**.
@@ -108,12 +108,12 @@ Sign in by using the following credentials:
 1. In the **Tools** pane, select **Firewall**.
 1. In the **Firewall** pane, select **Incoming rules**, and then select **New**.
 1. In the **New Rule** dialog box, enter the following information, and then select **Create**:
-    - Name: **SecureWeb**
+    - Name: **```SecureWeb```**
     - Direction: **Incoming**
     - Action: **Allowed**
     - Enable firewall rule: **Yes**
     - Protocol: **TCP**
-    - Local port: **443**
+    - Local port: **```443```**
     - Remote port: **blank**
     - ICMP types: **blank**
     - Profiles: **Select All**
@@ -122,7 +122,7 @@ Sign in by using the following credentials:
 
 1. On **SEA-CL1**, on the taskbar, select **Microsoft Edge**.
 1. In **Microsoft Edge**, in the address bar, enter **```https://remoteapp.contoso.com```**, and then select Enter.
-1. In the **Windows Security** dialog box, sign in as **Contoso\Administrator** with the password **Pa55w.rd**.
+1. In the **Windows Security** dialog box, sign in as **```Contoso\Administrator```** with the password **```Pa55w.rd```**.
 
 ### Exercise 2: Implementing VPN in Windows Server
 
@@ -214,7 +214,7 @@ Sign in by using the following credentials:
 2. In **Network & Internet**, select **VPN**, and then select **Add a VPN connection**.
 3. In the **Add a VPN connection** wizard, configure the following settings, and then select **Save**:
     - VPN provider: **Windows (built-in)**
-    - Connection name: **Contoso VPN**
+    - Connection name: **```Contoso VPN```**
     - Server name or address: **```vpn.contoso.com```**
     - VPN type: **Secure Socket Tunneling Protocol (SSTP)**
     - Type of sign-in info: **User name and password**
@@ -223,7 +223,7 @@ Sign in by using the following credentials:
 #### Task 3: Test the VPN connection
 
 1. Still in **Network & Internet**, select **Contoso VPN**, and then select **Connect**.
-2. In the **Sign in** dialog box, in the **User name** text box, enter **contoso\jane**, in the **Password text** box, enter **Pa55w.rd**, and then select **OK**.
+2. In the **Sign in** dialog box, in the **User name** text box, enter **```contoso\jane```**, in the **Password text** box, enter **```Pa55w.rd```**, and then select **OK**.
 3. Verify that **Connected** displays under **Contoso VPN**, indicating that you are now connected to the VPN server.
 4. In **Network & Internet**, select **Ethernet** and then under **Related settings**, select **Network and Sharing Center**.
 5. In **Network and Sharing Center**, select **Change Adapter settings**.
@@ -259,9 +259,11 @@ successfully provide VPN access.
 ##### Verify the Web Server installation
 
 1. On **SEA-SVR1**, open a Windows PowerShell command prompt, if not already open.
-2. In the Windows PowerShell command prompt, enter the following command, and then select Enter:`Get-eventLog System -After (Get-Date).AddHours(-1)`
+1. In the Windows PowerShell command prompt, enter the following command, and then select Enter:
+- `Get-eventLog System -After (Get-Date).AddHours(-1)`
 Verify that no errors display under the **EntryType** column.
-3. Still in the Windows PowerShell command prompt, enter the following command, and then select Enter:`Get-eventLog Application -After (Get-Date).AddHours(-1)`
+1. Still in the Windows PowerShell command prompt, enter the following command, and then select Enter:
+- `Get-eventLog Application -After (Get-Date).AddHours(-1)`
 Verify that only errors with word **License** display under the **Message** column.
 
 ##### Verify that the Windows Firewall rules for HTTP and HTTPS traffic are enabled
@@ -285,9 +287,11 @@ Verify that only errors with word **License** display under the **Message** colu
 ##### Configure DNS for the default website
 
 1. On **SEA-ADM1**, right-click (or access the context menu) the **Start** button, and then select **Windows PowerShell (Admin)**.
-2. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter: `Add-DnsServerResourceRecordA -ComputerName SEA-DC1 -Name "www" -ZoneName "contoso.com" -AllowUpdateAny -IPv4Address "172.16.10.12"`
-3. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:`Get-DnsServerResourceRecord -ComputerName SEA-DC1 -ZoneName "contoso.com"`
-4. In the output, verify **www** displays in the **HostName** column and that **172.16.10.12** displays under the **RecordData** column in the same row as the **www** entry.
+1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
+- `Add-DnsServerResourceRecordA -ComputerName SEA-DC1 -Name "www" -ZoneName "contoso.com" -AllowUpdateAny -IPv4Address "172.16.10.12"`
+1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
+- `Get-DnsServerResourceRecord -ComputerName SEA-DC1 -ZoneName "contoso.com"`
+1. In the output, verify **www** displays in the **HostName** column and that **172.16.10.12** displays under the **RecordData** column in the same row as the **www** entry.
 
 ##### Test the website by using DNS names
 
@@ -315,8 +319,7 @@ Verify that only errors with word **License** display under the **Message** colu
     - Password: **Pa55w.rd**
     - When prompted by the **Server Certificate Alert** dialog window, select **Connect**
     - Connection name: **SEA-SVR1**
-9. In the **Connections** pane, select **Start Page**.
-**Notice Recent connections**, **Connection tasks**, **Online resources**, and **IIS News**.
+9. In the **Connections** pane, select **Start Page**. Notice **Recent connections**, **Connection tasks**, **Online resources**, and **IIS News**.
 10. In the **Connections** pane, select **SEA-SVR1 (contoso\administrator)**. Notice the icons listed in the **Features View** pane. In the **Actions** pane, notice the list of **Manage Server** actions.
 11. In the **Connections** pane, expand **SEA-SVR1 (contoso\administrator)**, and then select **Sites**. In the **Features View** pane, notice the **Name** of the listed website and its **Status**.
 12. In the **Actions** pane, select **Set Website Defaults**. In the **Website Defaults** dialog box, notice the **Application Pool** setting. Select **Cancel**.
@@ -339,7 +342,7 @@ Verify that only errors with word **License** display under the **Message** colu
 
 #### Task 4: Verify site functionality
 
-1. Switch to **SEA-ADM1**, and in the **Internet Information Services (IIS) Manager**, right-click (or access the context menu) **Default Web Site** and select **Edit Bindings**.
+1. Switch to **SEA-ADM1**, and in the **Internet Information Services (IIS) Manager**, right-click (or access the context menu) **Default Web Site** and select **Bindings...**
 2. In the **Site Bindings** dialog box, select **Add** and under **type**, select **https**.
 3. Under **SSL certificate**, select the certificate displayed with a GUID, select **OK** and then select **Close**. The GUID will be similar to: **35B56A0F8D0AC682579BA893524EDFC6EC8FBA83**.
 4. In Microsoft Edge, enter **```http://www.contoso.com```** in the address bar, and then select Enter.
