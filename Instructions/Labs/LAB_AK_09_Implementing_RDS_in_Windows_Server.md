@@ -32,13 +32,13 @@ lab:
 
 > **NOTE**: We will now do the actual installation of RDS using Windows PowerShell. The previous steps were included to demonstrate how to install RDS using Server Manager.
 
-1. Switch to **SEA-DC1**. and
+1. Switch to **SEA-DC1**.
 1. In the **Administrator: C:\Windows\system32\cmd.exe** command prompt window, enter the following command, and then select Enter:
-`powershell`
+- `powershell`
 1. In the **Administrator: C:\Windows\system32\cmd.exe - powershell** window, enter the following command, and then select Enter:
-`$SVR="SEA-RDS1.contoso.com"`
+- `$SVR="SEA-RDS1.contoso.com"`
 1. In the **Administrator: C:\Windows\system32\cmd.exe - powershell** window, enter the following command, and then select Enter:
-`New-RDSessionDeployment -ConnectionBroker $SVR -WebAccessServer $SVR -SessionHost $SVR`
+- `New-RDSessionDeployment -ConnectionBroker $SVR -WebAccessServer $SVR -SessionHost $SVR`
 1. Wait for the installation to complete, which will take approximately 5 minutes, and then wait as **SEA-RDS1** restarts automatically.
 1. Switch to **SEA-RDS1** and sign in as **Contoso\Administrator** with the password **Pa55w.rd**
 1. Select the **Start** icon, and then select the **Server Manager** tile. 
@@ -70,7 +70,7 @@ lab:
 
 1. ON **SEA-RDS1**, right-click or access the context menu for the **Start** button, and then select **Windows PowerShell (Admin)**.
 2. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
-`New-RDSessionCollection –CollectionName IT –SessionHost SEA-RDS1.Contoso.com –CollectionDescription “This Collection is for the IT department in Contoso” –ConnectionBroker SEA-RDS1.Contoso.com`
+- `New-RDSessionCollection –CollectionName IT –SessionHost SEA-RDS1.Contoso.com –CollectionDescription “This Collection is for the IT department in Contoso” –ConnectionBroker SEA-RDS1.Contoso.com`
 3. Wait for the command to complete, which will take approximately 1 minute.
 4. Maximize **Server Manager**, and then select **Overview**.
 1. Refresh **Server Manager** by selecting the F5 key.
@@ -88,7 +88,7 @@ lab:
 1. In the **IT Properties** dialog box, select **Cancel**.
 1. Minimize **Server Manager**.
 1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
-`Get-RDSessionCollectionConfiguration –CollectionName IT –Client | Format-List`
+- `Get-RDSessionCollectionConfiguration –CollectionName IT –Client | Format-List`
 1. Examine the output and notice that next to **ClientDeviceRedirectionOptions**, the following entries are listed:
     - **AudioVideoPlayBack**
     - **AudioRecording**
@@ -97,8 +97,10 @@ lab:
     - **Clipboard**
     - **LPTPort**
     - **Drive**
-1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:`Set-RDSessionCollectionConfiguration –CollectionName IT –ClientDeviceRedirectionOptions PlugAndPlayDevice, SmartCard,Clipboard,LPTPort,Drive`
-1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:`Get-RDSessionCollectionConfiguration –CollectionName IT –Client | Format-List`
+1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
+- `Set-RDSessionCollectionConfiguration –CollectionName IT –ClientDeviceRedirectionOptions PlugAndPlayDevice, SmartCard,Clipboard,LPTPort,Drive`
+1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
+- `Get-RDSessionCollectionConfiguration –CollectionName IT –Client | Format-List`
 1. Examine the output, and notice that next to **ClientDeviceRedirectionOptions** only the following entries are listed now:
     - **PlugAndPlayDevice**
     - **SmartCard**
@@ -202,8 +204,8 @@ lab:
 #### Task 1: Verify the operating system (OS) version
 
 1. On **SEA-CL1**, sign in as **.\Admin** with the password **Pa55w.rd**.
-2. Select the Start button, enter **pc**, and then select **About your pc**.
-3. In the **Settings** app, on the **About screen**, verify the following information:
+2. Select the Start button, select the **Settings** gear icon. In the **Windows Settings** screen select **System**, and then select **About**.
+3. In the **About** screen, verify the following information:
     - The Windows operating system edition is Windows 10 Enterprise
     - The System type is 64-bit OS
 
