@@ -38,31 +38,31 @@ lab:
 1. Select **Start**, enter **Cmd** in the search box, and then select **Command Prompt** in the **Best match** list.
 2. At the command prompt, enter the following command, and then select Enter:
 
-    ```powershell
+    ```cmd
     Fsutil file createnew bigfile 104857600
     ```
 
 3. At the command prompt, enter the following command, and then select Enter:
 
-    ```powershell
+    ```cmd
     Copy bigfile \\SEA-dc1\c$
     ```
 
 4. At the command prompt, enter the following command, and then select Enter:
 
-    ```powershell
+    ```cmd
     Copy \\SEA-dc1\c$\bigfile bigfile2
     ```
 
 5. At the command prompt, enter the following command, and then select Enter:
 
-    ```powershell
+    ```cmd
     Del bigfile*.*
     ```
 
 6. At the command prompt, enter the following command, and then select Enter:
 
-    ```powershell
+    ```cmd
     Del \\SEA-dc1\c$\bigfile*.*
     ```
 
@@ -93,7 +93,7 @@ After this exercise, you should have established a baseline for performance-comp
 1. On **SEA-ADM1**, open File Explorer.
 2. Browse to **C:\Labfiles\Mod11**.
 3. Double-click or select **CPUSTRES64.EXE**, and then select Enter.
-4. In the **CPU Stress - Sysinternals:www.sysinternals.com** dialog box, right-click or access the context menu for the highlighted thread at the top of the list of running threads, select **Activity Level**, and then select **Busy (75%)**.
+4. In the **CPU Stress - Sysinternals: www.sysinternals.com** dialog box, right-click or access the context menu for the highlighted thread at the top of the list of running threads, select **Activity Level**, and then select **Busy (75%)**.
 
 #### Task 2: Capture performance data by using a data collector set
 
@@ -136,7 +136,7 @@ After this exercise, you should have used performance tools to identify a potent
 1. On **SEA-ADM1**, switch to the command prompt.
 2. At the command prompt, enter the following command, and then select Enter:
 
-    ```powershell
+    ```cmd
     winrm quickconfig
     ```
 
@@ -152,7 +152,7 @@ After this exercise, you should have used performance tools to identify a potent
 12. Switch to **SEA-CL1**.
 13. Open a **Command Prompt** window, enter the following command at the command prompt, and then select Enter:
 
-    ```powershell
+    ```cmd
     Wecutil qc
     ```
 
@@ -200,7 +200,7 @@ After this exercise, you should have used performance tools to identify a potent
 1. On **SEA-ADM1**, open File Explorer.
 2. Browse to **C:\Labfiles\Mod11**.
 3. Double-click or select **CPUSTRES64.EXE**, and then select Enter.
-4. In the **CPU Stress - Sysinternals:www.sysinternals.com** dialog box, right-click or access the context menu for the highlighted thread at the top of the list of running threads, select **Activity Level**, and then select **Busy (75%)**.
+4. In the **CPU Stress - Sysinternals: www.sysinternals.com** dialog box, right-click or access the context menu for the highlighted thread at the top of the list of running threads, select **Activity Level**, and then select **Busy (75%)**.
 5. After a minute, close CPUSTRES64 and File Explorer.
 
 #### Task 5: Verify the results
