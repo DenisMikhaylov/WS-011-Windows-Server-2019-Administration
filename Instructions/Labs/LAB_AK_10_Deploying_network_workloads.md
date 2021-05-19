@@ -24,15 +24,15 @@ Sign in by using the following credentials:
 
 > **Tip:** You don't need to sign in to **WS-011T00A-SEA-DC1** as you don't use this machine in this lab.
 
-## Exercise 1: Implementing Web Application Proxy
+### Exercise 1: Implementing Web Application Proxy
 
-### Task 1: Install AD FS on SEA-DC1
+#### Task 1: Install AD FS on SEA-DC1
 
 1. On **SEA-SVR1**, enter **powershell.exe**, and then select Enter.
 1. At the Windows PowerShell prompt, enter `C:\Labfiles\Mod03\InstallADFS.ps1`, and then select Enter.
 1. Wait for the restarting message to display.
 
-### Task 2: Create DNS entries for AD FS and Web Application Proxy
+#### Task 2: Create DNS entries for AD FS and Web Application Proxy
 
 1. On **SEA-ADM1**, on the taskbar, select **Microsoft Edge**.
 1. In **Microsoft Edge**, select **Windows Admin Center**.
@@ -52,14 +52,14 @@ Sign in by using the following credentials:
     - IP address: **```172.16.10.12```**
     - Time to live: **```3600```**
 
-### Task 3: Install Remote Access management tools
+#### Task 3: Install Remote Access management tools
 
 1. On **SEA-ADM1**, in **Windows Admin Center**, select **Windows Admin Center**, and then select **```sea-adm1.contoso.com [gateway]```**.
 1. On the **Tools** pane, select **Roles & features**.
 1. On the **Roles and features** pane, under **Features**, expand **Remote Server Administration Tools**, expand **Role Administration Tools**, select the **Remote Access Management Tools** check box, and then select **Install**.
 1. In the **Install Roles and Features** dialog box, select **Yes**.
 
-### Task 4: Install Web Application Proxy
+#### Task 4: Install Web Application Proxy
 
 1. On **SEA-ADM1**, in **Windows Admin Center**, select **Windows Admin Center**, and then select **SEA-SVR3**.
 1. In the **Specify your credentials** dialog box, select **Use another account for this connection**, and then sign in as **Contoso\Administrator** with the password **Pa55w.rd**.
@@ -67,7 +67,7 @@ Sign in by using the following credentials:
 1. On the **Roles and features** pane, expand **Remote Access**, select the **Web Application Proxy** check box, and then select **Install**.
 1. In the **Install Roles and Features** dialog box, select **Yes**.
 
-### Task 5: Configure Web Application Proxy
+#### Task 5: Configure Web Application Proxy
 
 1. On **SEA-ADM1**, select **Start**, and then select **Server Manager**.
 1. In **Server Manager**, select **Tools**, and then select **Remote Access Management**.
@@ -85,7 +85,7 @@ Sign in by using the following credentials:
 
 > **Note:** If you get an error in **Remote Access Management Console** indicating that cmdlets are not found, restart **Remote Access Management Console**.
 
-### Task 6: Configure a web application
+#### Task 6: Configure a web application
 
 1. On **SEA-ADM1**, in the **Remote Access Management Console**, in the **Tasks** pane, select **Publish**.
 1. In the **Publish New Application Wizard**, on the **Welcome** screen, select **Next**.
@@ -102,7 +102,7 @@ Sign in by using the following credentials:
 1. On the **Confirmation** screen, select **Publish**.
 1. On the **Results** screen, select **Close**.
 
-### Task 7: Configure Windows Defender Firewall to allow remote access
+#### Task 7: Configure Windows Defender Firewall to allow remote access
 
 1. On **SEA-ADM1**, in **Windows Admin Center**, select **Windows Admin Center**, and then select **```sea-adm1.contoso.com[gateway]```**.
 1. In the **Tools** pane, select **Firewall**.
@@ -118,7 +118,7 @@ Sign in by using the following credentials:
     - ICMP types: **blank**
     - Profiles: **Select All**
 
-### Task 8: Test the web application
+#### Task 8: Test the web application
 
 1. On **SEA-CL1**, on the taskbar, select **Microsoft Edge**.
 1. In **Microsoft Edge**, in the address bar, enter **```https://remoteapp.contoso.com```**, and then select Enter.
@@ -231,13 +231,13 @@ Sign in by using the following credentials:
 
 #### Verify connection on client and VPN server
 
-1. On **SEA-CL1**, right-click (or access the context menu) the **Start** button, and then select **Windows PowerShell (Admin)**.
-2. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter: `Get-NetIPConfiguration`
-3. Examine the output and verify that **Contoso VPN** is listed next to **InterfaceAlias**. Also verify that the **Contoso VPN** interface has been issued an IP Address. This is the IP address for VPN connection assigned by RRAS.
-4. Switch to **SEA-ADM1** and maximize the **Routing and Remote Access** snap-in.
-5. In the **Routing and Remote Access** snap-in, select **Remote Access Clients (0)** and verify that **Contoso\jane** is listed under the **User Name** column. This indicates that the user is connected to the VPN Server.
-6. Maximize **Server Manager**, select the **Tools** menu, and then select **Remote Access Management**.
-7. In the **Remote Access Management** console, select **Remote Client Status** and verify that **CONTOSO\jane** is listed in the **details** pane under **Connected Clients**. Notice that the VPN protocol displays under the **Protocol/Tunnel** field as **Sstp**.
+7. On **SEA-CL1**, right-click (or access the context menu) the **Start** button, and then select **Windows PowerShell (Admin)**.
+8. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter: `Get-NetIPConfiguration`
+9. Examine the output and verify that **Contoso VPN** is listed next to **InterfaceAlias**. Also verify that the **Contoso VPN** interface has been issued an IP Address. This is the IP address for VPN connection assigned by RRAS.
+10. Switch to **SEA-ADM1** and maximize the **Routing and Remote Access** snap-in.
+11. In the **Routing and Remote Access** snap-in, select **Remote Access Clients (0)** and verify that **Contoso\jane** is listed under the **User Name** column. This indicates that the user is connected to the VPN Server.
+12. Maximize **Server Manager**, select the **Tools** menu, and then select **Remote Access Management**.
+13. In the **Remote Access Management** console, select **Remote Client Status** and verify that **CONTOSO\jane** is listed in the **details** pane under **Connected Clients**. Notice that the VPN protocol displays under the **Protocol/Tunnel** field as **Sstp**.
 
 **Question:** Why did you disable the PPTP authentication protocol when you configured the ports of the VPN Server?
 
@@ -258,72 +258,71 @@ successfully provide VPN access.
 
 ##### Verify the Web Server installation
 
-1. On **SEA-SVR1**, open a Windows PowerShell command prompt, if not already open.
-1. In the Windows PowerShell command prompt, enter the following command, and then select Enter:
-- `Get-eventLog System -After (Get-Date).AddHours(-1)`
-Verify that no errors display under the **EntryType** column.
-1. Still in the Windows PowerShell command prompt, enter the following command, and then select Enter:
-- `Get-eventLog Application -After (Get-Date).AddHours(-1)`
-Verify that only errors with word **License** display under the **Message** column.
+5. On **SEA-SVR1**, open a Windows PowerShell command prompt, if not already open.
+
+6. In the Windows PowerShell command prompt, enter the following command, and then select Enter:
+- `Get-eventLog System -After (Get-Date).AddHours(-1)` Verify that no errors display under the **EntryType** column.
+
+7. Still in the Windows PowerShell command prompt, enter the following command, and then select Enter: - `Get-eventLog Application -After (Get-Date).AddHours(-1)` Verify that only errors with word **License** display under the **Message** column.
 
 ##### Verify that the Windows Firewall rules for HTTP and HTTPS traffic are enabled
 
-1. On **SEA-SVR1**, in a Windows PowerShell command prompt, enter the following command, and then select Enter:`Get-NetFirewallProfile -Name Domain | Get-NetFirewallRule | where-Object {$_.DisplayName -like "World Wide Web*"}`
-2. This will return information about two rules. One for HTTP and one for HTTPS. Verify that both rules are enabled and allow inbound traffic.
-3. Examine the **Enabled** value. It should display **True**. Also examine the **Direction** value, which should display **Inbound**.
-4. Leave the Windows PowerShell command prompt open.
+8. On **SEA-SVR1**, in a Windows PowerShell command prompt, enter the following command, and then select Enter:`Get-NetFirewallProfile -Name Domain | Get-NetFirewallRule | where-Object {$_.DisplayName -like "World Wide Web*"}`
+9. This will return information about two rules. One for HTTP and one for HTTPS. Verify that both rules are enabled and allow inbound traffic.
+10. Examine the **Enabled** value. It should display **True**. Also examine the **Direction** value, which should display **Inbound**.
+11. Leave the Windows PowerShell command prompt open.
 
 ##### Test the default website
 
-1. Switch to **SEA-ADM1** and in the taskbar select the Microsoft edge icon, which is to the right of the **File Explorer** icon.
-2. In Microsoft Edge, enter **```http://SEA-SVR1```** in the address bar, and then select Enter.
-3. Verify that IIS displays the default, **Internet Information Services** webpage.
-4. In Microsoft Edge, enter **```http://172.16.10.12```** in the address bar, and then select Enter.
-5. Verify that IIS displays the default, **Internet Information Services webpage**.
-6. Leave Microsoft Edge open.
+12. Switch to **SEA-ADM1** and in the taskbar select the Microsoft edge icon, which is to the right of the **File Explorer** icon.
+13. In Microsoft Edge, enter **```http://SEA-SVR1```** in the address bar, and then select Enter.
+14. Verify that IIS displays the default, **Internet Information Services** webpage.
+15. In Microsoft Edge, enter **```http://172.16.10.12```** in the address bar, and then select Enter.
+16. Verify that IIS displays the default, **Internet Information Services webpage**.
+17. Leave Microsoft Edge open.
 
 #### Task 2: Configure Web Server options
 
 ##### Configure DNS for the default website
 
 1. On **SEA-ADM1**, right-click (or access the context menu) the **Start** button, and then select **Windows PowerShell (Admin)**.
-1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
+2. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
 - `Add-DnsServerResourceRecordA -ComputerName SEA-DC1 -Name "www" -ZoneName "contoso.com" -AllowUpdateAny -IPv4Address "172.16.10.12"`
-1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
+3. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
 - `Get-DnsServerResourceRecord -ComputerName SEA-DC1 -ZoneName "contoso.com"`
-1. In the output, verify **www** displays in the **HostName** column and that **172.16.10.12** displays under the **RecordData** column in the same row as the **www** entry.
+4. In the output, verify **www** displays in the **HostName** column and that **172.16.10.12** displays under the **RecordData** column in the same row as the **www** entry.
 
 ##### Test the website by using DNS names
 
-1. In Microsoft Edge, enter **```http://www.contoso.com```** in the address bar, and then select Enter.
-2. Verify that IIS displays the default, **Internet Information Services webpage**.
+5. In Microsoft Edge, enter **```http://www.contoso.com```** in the address bar, and then select Enter.
+6. Verify that IIS displays the default, **Internet Information Services webpage**.
 
 ##### Enable remote management of IIS using IIS Manager
 
-1. On **SEA-SVR1**, open a Windows PowerShell command prompt, if it's not already open.
-2. On **SEA-SVR1**, in the Windows PowerShell command prompt, enter the following command, and then select Enter: `Install-WindowsFeature -Name Web-Mgmt-Service` Wait for the command to complete, which should take approximately one minute.
-3. On **SEA-SVR1**, in the Windows PowerShell command prompt, enter the following command, and then select Enter:`Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WebManagement\Server' -Name EnableRemoteManagement -Value 1`
-4. On **SEA-SVR1**, in the Windows PowerShell command prompt, enter the following command, and then select Enter:`Restart-Service wmsvc`
+7. On **SEA-SVR1**, open a Windows PowerShell command prompt, if it's not already open.
+8. On **SEA-SVR1**, in the Windows PowerShell command prompt, enter the following command, and then select Enter: `Install-WindowsFeature -Name Web-Mgmt-Service` Wait for the command to complete, which should take approximately one minute.
+9. On **SEA-SVR1**, in the Windows PowerShell command prompt, enter the following command, and then select Enter:`Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WebManagement\Server' -Name EnableRemoteManagement -Value 1`
+10. On **SEA-SVR1**, in the Windows PowerShell command prompt, enter the following command, and then select Enter:`Restart-Service wmsvc`
 
 > **Note:** Setting this registry key to 1 will enable remote management of IIS. You must restart the **Web Management Service (wmsvc)** after changing the registry key.
 
-5. On **SEA-ADM1**, open a Windows PowerShell command prompt, if it's not already open.
-6. On **SEA-ADM1**, in the Windows PowerShell command prompt, enter the following command, and then select Enter:`Install-WindowsFeature -Name Web-Mgmt-Console,Web-Scripting-Tools`. Wait for the command to complete, which should take approximately one minute.
+11. On **SEA-ADM1**, open a Windows PowerShell command prompt, if it's not already open.
+12. On **SEA-ADM1**, in the Windows PowerShell command prompt, enter the following command, and then select Enter:`Install-WindowsFeature -Name Web-Mgmt-Console,Web-Scripting-Tools`. Wait for the command to complete, which should take approximately one minute.
 
 > **Note:** The output from this command will return **NoChangeNeeded** under the **Exit Code** column. This is because, you already installed the management tools during exercise 1. This step has been left here intentionally to show the complete process of enabling remote management of IIS.
 
-7. On **SEA-ADM1**, select the **Start** button, and then select the **Server Manager** tile. In **Server Manager**, select **Tools**, and then select **Internet Information Services (IIS) Manager**.
-8. On the **Start Page**, under **Connection tasks**, select **Connect to a server**. Use the following information and select **Finish** to complete the wizard:
+13. On **SEA-ADM1**, select the **Start** button, and then select the **Server Manager** tile. In **Server Manager**, select **Tools**, and then select **Internet Information Services (IIS) Manager**.
+14. On the **Start Page**, under **Connection tasks**, select **Connect to a server**. Use the following information and select **Finish** to complete the wizard:
     - Server name: **SEA-SVR1**
     - User name: **contoso\administrator**
     - Password: **Pa55w.rd**
     - When prompted by the **Server Certificate Alert** dialog window, select **Connect**
     - Connection name: **SEA-SVR1**
-9. In the **Connections** pane, select **Start Page**. Notice **Recent connections**, **Connection tasks**, **Online resources**, and **IIS News**.
-10. In the **Connections** pane, select **SEA-SVR1 (contoso\administrator)**. Notice the icons listed in the **Features View** pane. In the **Actions** pane, notice the list of **Manage Server** actions.
-11. In the **Connections** pane, expand **SEA-SVR1 (contoso\administrator)**, and then select **Sites**. In the **Features View** pane, notice the **Name** of the listed website and its **Status**.
-12. In the **Actions** pane, select **Set Website Defaults**. In the **Website Defaults** dialog box, notice the **Application Pool** setting. Select **Cancel**.
-13. Leave **Internet Information Services (IIS) Manager** open. 
+15. In the **Connections** pane, select **Start Page**. Notice **Recent connections**, **Connection tasks**, **Online resources**, and **IIS News**.
+16. In the **Connections** pane, select **SEA-SVR1 (contoso\administrator)**. Notice the icons listed in the **Features View** pane. In the **Actions** pane, notice the list of **Manage Server** actions.
+17. In the **Connections** pane, expand **SEA-SVR1 (contoso\administrator)**, and then select **Sites**. In the **Features View** pane, notice the **Name** of the listed website and its **Status**.
+18. In the **Actions** pane, select **Set Website Defaults**. In the **Website Defaults** dialog box, notice the **Application Pool** setting. Select **Cancel**.
+19. Leave **Internet Information Services (IIS) Manager** open. 
 
 #### Task 3: Create and configure a new site
 
@@ -336,9 +335,9 @@ Verify that only errors with word **License** display under the **Message** colu
 
 ##### Request a new Web Server certificate
 
-1. On **SEA-SVR1**, in the **Administrator C:\Windows\system32\cmd.exe - powershell** window, enter the following command, and then select Enter:`Get-Certificate -Template ContosoWebServer -DnsName www.contoso.com -CertStoreLocation cert:\LocalMachine\My`.
-2. Wait for the command to complete, which should take approximately 30 seconds.
-3. In the output, verify that **Issued** displays under **Status**.
+5. On **SEA-SVR1**, in the **Administrator C:\Windows\system32\cmd.exe - powershell** window, enter the following command, and then select Enter:`Get-Certificate -Template ContosoWebServer -DnsName www.contoso.com -CertStoreLocation cert:\LocalMachine\My`.
+6. Wait for the command to complete, which should take approximately 30 seconds.
+7. In the output, verify that **Issued** displays under **Status**.
 
 #### Task 4: Verify site functionality
 
@@ -346,5 +345,5 @@ Verify that only errors with word **License** display under the **Message** colu
 2. In the **Site Bindings** dialog box, select **Add** and under **type**, select **https**.
 3. Under **SSL certificate**, select the certificate displayed with a GUID, select **OK** and then select **Close**. The GUID will be similar to: **35B56A0F8D0AC682579BA893524EDFC6EC8FBA83**.
 4. In Microsoft Edge, enter **```http://www.contoso.com```** in the address bar, and then select Enter.
-2. Verify that IIS displays the default **Internet Information Services webpage**. Notice that **Not secure** displays next to **```www.contoso.com```**.
-5. In the address bar, enter **```https://www.contoso.com```**. Verify that IIS displays the website. Notice that a padlock displays next to **```www.contoso.com```**. This means that the website is protected using SSL.
+5. Verify that IIS displays the default **Internet Information Services webpage**. Notice that **Not secure** displays next to **```www.contoso.com```**.
+6. In the address bar, enter **```https://www.contoso.com```**. Verify that IIS displays the website. Notice that a padlock displays next to **```www.contoso.com```**. This means that the website is protected using SSL.
