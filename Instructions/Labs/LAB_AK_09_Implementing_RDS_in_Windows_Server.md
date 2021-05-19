@@ -21,12 +21,12 @@ lab:
 
     > **NOTE**: Even though, we could have selected the **Quick Start** deployment option and have all three required Remote Desktop Services (RDS) role services installed on **SEA-RDS1**, you selected the **Standard deployment** option to practice selecting different servers for the RDS role services. Furthermore, the **Quick Start** deployment option will create a collection named **QuickSessionCollection** and publish the following  RemoteApp Programs: **Calculator**, **Paint**, and **WordPad**.
 
-5. On the **Select deployment scenario** page, select **Session-based desktop deployment**, and then select **Next**.
-6. On the **Review role services** page, review the description of the role services, and then select **Next**.
-7. On the **Specify RD Connection Broker server** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computer to the **Selected** section by selecting the Right arrow, and then select **Next**.
-8. On the **Specify RD Web Access server** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computer to the **Selected** section by selecting the Right arrow, and then select **Next**.
-9. On the **Specify RD Session Host servers** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computers to the **Selected** section by selecting the Right arrow, and then select **Next**.
-10. On the **Confirm selections** page, select **Cancel**
+1. On the **Select deployment scenario** page, select **Session-based desktop deployment**, and then select **Next**.
+1. On the **Review role services** page, review the description of the role services, and then select **Next**.
+1. On the **Specify RD Connection Broker server** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computer to the **Selected** section by selecting the Right arrow, and then select **Next**.
+1. On the **Specify RD Web Access server** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computer to the **Selected** section by selecting the Right arrow, and then select **Next**.
+1. On the **Specify RD Session Host servers** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computers to the **Selected** section by selecting the Right arrow, and then select **Next**.
+1. On the **Confirm selections** page, select **Cancel**
 
 ##### Install RDS using Windows PowerShell
 
@@ -120,8 +120,8 @@ lab:
 - `$acl.SetAccessRule($AccessRule)`
 - `$acl | Set-Acl C:\RDSUserProfiles`
 
-2. Verify that each command executes successfully.
-3. Switch to SEA-RDS1.
+1. Verify that each command executes successfully.
+1. Switch to SEA-RDS1.
 1. In the navigation pane, select the **IT** collection.
 1. Next to ****PROPERTIES**, select **TASKS**, and then select **Edit Properties**.
 1. On the **Session Collection** page, select **User Profile Disks**, and then select **Enable user profile disks**.
