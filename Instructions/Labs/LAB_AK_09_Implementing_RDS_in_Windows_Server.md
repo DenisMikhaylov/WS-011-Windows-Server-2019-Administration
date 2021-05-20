@@ -21,24 +21,24 @@ lab:
 
     > **NOTE**: Even though, we could have selected the **Quick Start** deployment option and have all three required Remote Desktop Services (RDS) role services installed on **SEA-RDS1**, you selected the **Standard deployment** option to practice selecting different servers for the RDS role services. Furthermore, the **Quick Start** deployment option will create a collection named **QuickSessionCollection** and publish the following  RemoteApp Programs: **Calculator**, **Paint**, and **WordPad**.
 
-5. On the **Select deployment scenario** page, select **Session-based desktop deployment**, and then select **Next**.
-6. On the **Review role services** page, review the description of the role services, and then select **Next**.
-7. On the **Specify RD Connection Broker server** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computer to the **Selected** section by selecting the Right arrow, and then select **Next**.
-8. On the **Specify RD Web Access server** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computer to the **Selected** section by selecting the Right arrow, and then select **Next**.
-9. On the **Specify RD Session Host servers** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computers to the **Selected** section by selecting the Right arrow, and then select **Next**.
-10. On the **Confirm selections** page, select **Cancel**
+1. On the **Select deployment scenario** page, select **Session-based desktop deployment**, and then select **Next**.
+1. On the **Review role services** page, review the description of the role services, and then select **Next**.
+1. On the **Specify RD Connection Broker server** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computer to the **Selected** section by selecting the Right arrow, and then select **Next**.
+1. On the **Specify RD Web Access server** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computer to the **Selected** section by selecting the Right arrow, and then select **Next**.
+1. On the **Specify RD Session Host servers** page, in the **Server Pool** section, select **```SEA-RDS1.Contoso.com```**. Add the computers to the **Selected** section by selecting the Right arrow, and then select **Next**.
+1. On the **Confirm selections** page, select **Cancel**
 
 ##### Install RDS using Windows PowerShell
 
 > **NOTE**: We will now do the actual installation of RDS using Windows PowerShell. The previous steps were included to demonstrate how to install RDS using Server Manager.
 
-1. Switch to **SEA-DC1**. and
+1. Switch to **SEA-DC1**.
 1. In the **Administrator: C:\Windows\system32\cmd.exe** command prompt window, enter the following command, and then select Enter:
-`powershell`
+    `powershell`
 1. In the **Administrator: C:\Windows\system32\cmd.exe - powershell** window, enter the following command, and then select Enter:
-`$SVR="SEA-RDS1.contoso.com"`
+    `$SVR="SEA-RDS1.contoso.com"`
 1. In the **Administrator: C:\Windows\system32\cmd.exe - powershell** window, enter the following command, and then select Enter:
-`New-RDSessionDeployment -ConnectionBroker $SVR -WebAccessServer $SVR -SessionHost $SVR`
+    `New-RDSessionDeployment -ConnectionBroker $SVR -WebAccessServer $SVR -SessionHost $SVR`
 1. Wait for the installation to complete, which will take approximately 5 minutes, and then wait as **SEA-RDS1** restarts automatically.
 1. Switch to **SEA-RDS1** and sign in as **Contoso\Administrator** with the password **Pa55w.rd**
 1. Select the **Start** icon, and then select the **Server Manager** tile. 
@@ -70,7 +70,7 @@ lab:
 
 1. ON **SEA-RDS1**, right-click or access the context menu for the **Start** button, and then select **Windows PowerShell (Admin)**.
 2. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
-`New-RDSessionCollection –CollectionName IT –SessionHost SEA-RDS1.Contoso.com –CollectionDescription “This Collection is for the IT department in Contoso” –ConnectionBroker SEA-RDS1.Contoso.com`
+    `New-RDSessionCollection –CollectionName IT –SessionHost SEA-RDS1.Contoso.com –CollectionDescription “This Collection is for the IT department in Contoso” –ConnectionBroker SEA-RDS1.Contoso.com`
 3. Wait for the command to complete, which will take approximately 1 minute.
 4. Maximize **Server Manager**, and then select **Overview**.
 1. Refresh **Server Manager** by selecting the F5 key.
@@ -88,7 +88,7 @@ lab:
 1. In the **IT Properties** dialog box, select **Cancel**.
 1. Minimize **Server Manager**.
 1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
-`Get-RDSessionCollectionConfiguration –CollectionName IT –Client | Format-List`
+    `Get-RDSessionCollectionConfiguration –CollectionName IT –Client | Format-List`
 1. Examine the output and notice that next to **ClientDeviceRedirectionOptions**, the following entries are listed:
     - **AudioVideoPlayBack**
     - **AudioRecording**
@@ -97,8 +97,10 @@ lab:
     - **Clipboard**
     - **LPTPort**
     - **Drive**
-1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:`Set-RDSessionCollectionConfiguration –CollectionName IT –ClientDeviceRedirectionOptions PlugAndPlayDevice, SmartCard,Clipboard,LPTPort,Drive`
-1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:`Get-RDSessionCollectionConfiguration –CollectionName IT –Client | Format-List`
+1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
+    `Set-RDSessionCollectionConfiguration –CollectionName IT –ClientDeviceRedirectionOptions PlugAndPlayDevice, SmartCard,Clipboard,LPTPort,Drive`
+1. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
+    `Get-RDSessionCollectionConfiguration –CollectionName IT –Client | Format-List`
 1. Examine the output, and notice that next to **ClientDeviceRedirectionOptions** only the following entries are listed now:
     - **PlugAndPlayDevice**
     - **SmartCard**
@@ -111,15 +113,15 @@ lab:
 1. Switch to **SEA-DC1**.
 1. In the **Administrator: C:\Windows\system32\cmd.exe - powershell** window, enter the following commands, one line at a time, and then select Enter:
 
-- `New-Item C:\RDSUserProfiles -itemtype directory`
-- `New-SMBShare –Name “RDSUserProfiles” –Path “C:\RDSUserProfiles” –FullAccess "Contoso\SEA-RDS1$", "Contoso\administrator"`
-- `$acl = Get-Acl C:\RDSUserProfiles`
-- `$AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("Contoso\SEA-RDS1$","FullControl","Allow")`
-- `$acl.SetAccessRule($AccessRule)`
-- `$acl | Set-Acl C:\RDSUserProfiles`
+    `New-Item C:\RDSUserProfiles -itemtype directory`
+    `New-SMBShare –Name “RDSUserProfiles” –Path “C:\RDSUserProfiles” –FullAccess "Contoso\SEA-RDS1$", "Contoso\administrator"`
+    `$acl = Get-Acl C:\RDSUserProfiles`
+    `$AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("Contoso\SEA-RDS1$","FullControl","Allow")`
+    `$acl.SetAccessRule($AccessRule)`
+    `$acl | Set-Acl C:\RDSUserProfiles`
 
-2. Verify that each command executes successfully.
-3. Switch to SEA-RDS1.
+1. Verify that each command executes successfully.
+1. Switch to SEA-RDS1.
 1. In the navigation pane, select the **IT** collection.
 1. Next to ****PROPERTIES**, select **TASKS**, and then select **Edit Properties**.
 1. On the **Session Collection** page, select **User Profile Disks**, and then select **Enable user profile disks**.
@@ -128,8 +130,8 @@ lab:
 #### Task 4: Connect to the Session Collection from RD Web portal
 
 1. On **SEA-CL1**, on the taskbar, select the **Microsoft Edge** icon.
-1. In **Microsoft Edge**, in the address bar, enter **```https://SEA-RDS1.Contoso.com/rdweb```**.
-1. On the **This site is not secure** page, select **Details**, and then select **Go on to the webpage**.
+2. In **Microsoft Edge**, in the address bar, enter **```https://SEA-RDS1.Contoso.com/rdweb```**.
+3. On the **This site is not secure** page, select **Details**, and then select **Go on to the webpage**.
 
 > **NOTE**: This page opens because RD Web is using a self-signed certificate that is not trusted by the client. In a real production deployment, you would use trusted certificates.
 
@@ -148,11 +150,11 @@ lab:
 ##### Verify User Profile Disk creation
 
 1. Switch to **SEA-DC1**, and in the **Administrator: C:\Windows\system32\cmd.exe - powershell** window, enter the following command, and then select Enter:
-`cd\`
+    `cd\`
 2. Enter the following command, and then select Enter:
-`cd RDSUserProfiles`
+    `cd RDSUserProfiles`
 3. Enter the following command, and then select Enter:
-`dir`
+    `dir`
 4. Examine the contents of the **RDSUserProfiles** folder. Verify that there is a **.vhdx** file with an SID (a long string that starts with **S-1-5-21**) in its name.
 
 ### Exercise 2: Configuring RemoteApp collection settings
@@ -169,10 +171,10 @@ lab:
 
 1. ON **SEA-RDS1**, right-click or access the context menu for **Start**, and then select **Windows PowerShell (Admin)**.
 2. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
-`New-RDRemoteApp -Alias Paint -DisplayName Paint -FilePath "C:\Windows\system32\mspaint.exe" -ShowInWebAccess 1 -collectionname IT -ConnectionBroker SEA-RDS1.Contoso.com`
+    `New-RDRemoteApp -Alias Paint -DisplayName Paint -FilePath "C:\Windows\system32\mspaint.exe" -ShowInWebAccess 1 -collectionname IT -ConnectionBroker SEA-RDS1.Contoso.com`
 3. When the command has completed, review the information about the published app, and then minimize the WindowsPowerShell window.
 4. In the **Administrator: Windows PowerShell** window, enter the following command, and then select Enter:
-`Get-RDRemoteApp -CollectionName IT`
+    `Get-RDRemoteApp -CollectionName IT`
 4. Examine the output of the command. Notice that you will get a list of all published RemoteApp programs.
 5. Maximize **Server Manager**, and then select **Overview**.
 1. Refresh **Server Manager** by selecting F5.
@@ -192,18 +194,18 @@ lab:
 > **NOTE**: The **Unknown publisher** pop-up window displays because you have not yet configured certificates for RDS.
 
 6. In the **Windows Security** dialog box, in the **Password** field, enter **Pa55w.rd**.
-1. Wait for the RemoteApp **Paint** program to start, and then test its functionality.
-1. In **Paint**, select **File**, and then select **Exit** to close the application.
-1. Back on the **RD Web Access** page, select **Sign out**.
-1. Close Microsoft Edge.
+7. Wait for the RemoteApp **Paint** program to start, and then test its functionality.
+8. In **Paint**, select **File**, and then select **Exit** to close the application.
+9. Back on the **RD Web Access** page, select **Sign out**.
+10. Close Microsoft Edge.
 
 ### Exercise 3: Configure a virtual desktop template
 
 #### Task 1: Verify the operating system (OS) version
 
 1. On **SEA-CL1**, sign in as **.\Admin** with the password **Pa55w.rd**.
-2. Select the Start button, enter **pc**, and then select **About your pc**.
-3. In the **Settings** app, on the **About screen**, verify the following information:
+2. Select the Start button, select the **Settings** gear icon. In the **Windows Settings** screen select **System**, and then select **About**.
+3. In the **About** screen, verify the following information:
     - The Windows operating system edition is Windows 10 Enterprise
     - The System type is 64-bit OS
 

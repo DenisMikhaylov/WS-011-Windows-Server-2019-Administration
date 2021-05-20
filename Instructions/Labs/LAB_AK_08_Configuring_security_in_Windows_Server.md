@@ -32,15 +32,16 @@ lab:
 
 1. On **SEA-ADM1**, select **Start**, and then enter **Powershell**.
 2. Right-click or access the context menu for **Windows PowerShell**, and then select **Run as administrator**.
-3. Navigate to **c:\\labfiles\\Mod08**.
-4. Enter the following command:
+3. Enter the following command:
 
     ```powershell
+    cd c:\\labfiles\\Mod08
     DG_Readiness_Tool.ps1 -Enable -AutoReboot
+    
     ```
 
-5. Your virtual machine will restart after the tool has completed running.
-6. When the virtual machine restarts, reenter the credentials for **Contoso\\Administrator**.
+4. Your virtual machine will restart after the tool has completed running.
+5. When the virtual machine restarts, reenter the credentials for **Contoso\\Administrator**.
 
 ## Exercise 2: Locating problematic accounts
 
@@ -52,6 +53,7 @@ lab:
 
     ```powershell
     Get-ADUser -Filter {Enabled -eq $true -and PasswordNeverExpires -eq $true}
+    
     ```
 
 4. Review the list of user accounts returned.
@@ -59,6 +61,7 @@ lab:
 
     ```powershell
     Get-ADUser -Filter {Enabled -eq $true -and PasswordNeverExpires -eq $true} | Set-ADUser -PasswordNeverExpires $false
+    
     ```
 
 6. Rerun the command from step 3 and notice that no users are returned.
@@ -70,6 +73,7 @@ lab:
     ```cmd
     $days = (Get-Date).Adddays(-90)
     Get-ADUser -Filter {LastLogonTimeStamp -lt $days -and enabled -eq $true} -Properties LastLogonTimeStamp
+    
     ```
 
 2. In the lab environment, no accounts will be returned.
@@ -77,6 +81,7 @@ lab:
 
     ```cmd
     Get-ADUser -Filter {LastLogonTimeStamp -lt $days -and enabled -eq $true} -Properties LastLogonTimeStamp | Disable-ADAccount
+    
     ```
 
 4. No results will be returned in the lab environment.
@@ -92,12 +97,14 @@ lab:
     ```powershell
     New-ADOrganizationalUnit -Name "Seattle_Servers"
     Get-ADComputer SEA-SVR1 | Move-ADObject –TargetPath "OU=Seattle_Servers,DC=Contoso,DC=com"
+    
     ```
 
 4. Enter the following command:
 
     ```powershell
     Msiexec /I C:\Labfiles\Mod08\LAPS.x64.msi
+    
     ```
 
 5. When the **Local Administrator Password Solution Setup Wizard** opens, select **Next**.
@@ -113,6 +120,7 @@ lab:
     Import-Module admpwd.ps
     Update-AdmPwdADSchema
     Set-AdmPwdComputerSelfPermission -Identity "Seattle_Servers"
+    
     ```
 
 2. Select **Start**, and then enter **Group Policy**.
@@ -138,6 +146,7 @@ lab:
 
     ```cmd
     Msiexec /I \\SEA-ADM1\c$\Labfiles\Mod08\LAPS.x64.msi
+    
     ```
 
 3. When the **Local Administrator Password Solution Setup Wizard** opens, select **Next**.
@@ -147,7 +156,8 @@ lab:
 7. Enter the following command:
 
     ```cmd
-    gpupdate /forces
+    gpupdate /force
+    
     ```
 
 ### Task 4: Verify LAPS
@@ -160,6 +170,7 @@ lab:
 
     ```powershell
     Get-ADComputer SEA-SVR1 -Properties ms-Mcs-AdmPwd
+    
     ```
 
 6. Review the password assigned to SEA-SVR1.
