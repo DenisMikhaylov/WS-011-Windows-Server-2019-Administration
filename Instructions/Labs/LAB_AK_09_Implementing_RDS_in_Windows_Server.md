@@ -112,13 +112,24 @@ lab:
 
 1. Switch to **SEA-DC1**.
 1. In the **Administrator: C:\Windows\system32\cmd.exe - powershell** window, enter the following commands, one line at a time, and then select Enter:
-
+```
     `New-Item C:\RDSUserProfiles -itemtype directory`
+```
+```
     `New-SMBShare –Name “RDSUserProfiles” –Path “C:\RDSUserProfiles” –FullAccess "Contoso\SEA-RDS1$", "Contoso\administrator"`
+```
+```
     `$acl = Get-Acl C:\RDSUserProfiles`
+```
+```
     `$AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("Contoso\SEA-RDS1$","FullControl","Allow")`
+```
+```
     `$acl.SetAccessRule($AccessRule)`
+```
+```
     `$acl | Set-Acl C:\RDSUserProfiles`
+```
 
 1. Verify that each command executes successfully.
 1. Switch to SEA-RDS1.
